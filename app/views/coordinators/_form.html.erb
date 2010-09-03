@@ -1,0 +1,9 @@
+<% form_for @coordinator do | f | %>
+<ol>
+  <li><%= f.label :first_name %><%= f.text_field :first_name %></li>
+  <li><%= f.label :last_name %><%= f.text_field :last_name %></li>
+  <li><%= f.label :phone %><%= f.text_field :phone %></li>
+  <li><%= f.label :email %><%= f.text_field :email %></li>
+  <li><%= f.submit %></li>
+</ol>
+<% end %>

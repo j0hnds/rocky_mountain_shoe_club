@@ -1,0 +1,22 @@
+<% content_for :title do %>
+Coordinators
+<% end %>
+<div class="header">Coordinators</div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @coordinators.each do | coordinator | %>
+    <tr>
+      <td><%= link_to(format_name(coordinator), edit_coordinator_path(coordinator)) -%></td>
+      <td><%= coordinator.phone -%></td>
+      <td><%= coordinator.email -%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
