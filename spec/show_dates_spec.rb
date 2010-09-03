@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'show_dates'
 
 describe 'ShowDates' do
+  include ShowDates
   before(:each) do
   end
 

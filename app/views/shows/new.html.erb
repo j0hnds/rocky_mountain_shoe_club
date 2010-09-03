@@ -1,0 +1,6 @@
+<!-- Do a form for creating coordinators -->
+<% if flash[:error] -%>
+  Error: <%= flash[:error] %>
+<% end %>
+<%= error_messages_for :show %>
+<%= render :partial => "form" %>

@@ -1,4 +1,6 @@
+
 class Show < ActiveRecord::Base
+  include ShowDates
   belongs_to :coordinator
   belongs_to :venue
 

@@ -4,6 +4,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ShowsController do
+  include ShowDates
   before(:each) do
 #    @shows_controller = ShowsController.new
   end

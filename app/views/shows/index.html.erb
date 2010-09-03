@@ -1,0 +1,30 @@
+<% content_for :title do %>
+Shows
+<% end %>
+<div class="header">Shows</div>
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Coordinator</th>
+      <th>Venue</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Next Start Date</th>
+      <th>Next End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shows.each do | show | %>
+    <tr id="show_<%= show.id -%>">
+      <td><%= link_to(show.description, edit_show_path(show)) -%></td>
+      <td><%= format_name(show.coordinator) -%></td>
+      <td><%= show.venue.name -%></td>
+      <td><%= format_date(show.start_date) -%></td>
+      <td><%= format_date(show.end_date) -%></td>
+      <td><%= format_date(show.next_start_date) -%></td>
+      <td><%= format_date(show.next_end_date) -%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
