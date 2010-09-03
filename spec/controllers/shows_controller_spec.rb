@@ -24,10 +24,20 @@ describe ShowsController do
   end
 
   it "returns a new show for the new action" do
+    2.times { Factory.create(:venue) }
+    3.times { Factory.create(:coordinator) }
     get :new
     show = assigns[:show]
     show.should_not be nil
     show.new_record?.should be true
+
+    venues = assigns[:venues]
+    venues.should_not be nil
+    venues.size.should be 2
+
+    coordinators = assigns[:coordinators]
+    coordinators.should_not be nil
+    coordinators.size.should be 3
 
     # The dates for this show and the next show should be defaulted
     show_start_date = next_show_date
@@ -107,6 +117,14 @@ describe ShowsController do
     show = assigns[:show]
     show.should_not be nil
     show.new_record?.should be false
+
+    venues = assigns[:venues]
+    venues.should_not be nil
+    venues.size.should be 1
+
+    coordinators = assigns[:coordinators]
+    coordinators.should_not be nil
+    coordinators.size.should be 1
 
     show.description.should == show1.description
     show.coordinator_id.should == show1.coordinator_id

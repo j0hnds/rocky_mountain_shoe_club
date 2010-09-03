@@ -8,6 +8,8 @@ class ShowsController < ApplicationController
   def new
     @show = Show.new
     @show.set_default_dates
+    @venues = Venue.all
+    @coordinators = Coordinator.all
   end
 
   def create
@@ -22,6 +24,8 @@ class ShowsController < ApplicationController
 
   def edit
     @show = Show.find(params[:id])
+    @venues = Venue.all
+    @coordinators = Coordinator.all
   end
 
   def update
