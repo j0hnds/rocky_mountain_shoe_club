@@ -3,10 +3,10 @@
   <li><%= f.label :description %><%= f.text_field :description %></li>
   <li><%= f.label :coordinator_id %><%= f.select :coordinator_id, coordinator_options(@coordinators) %></li>
   <li><%= f.label :venue_id %><%= f.select :venue_id, venue_options(@venues) %></li>
-  <li><%= f.label :start_date %><%= f.text_field :start_date %></li>
-  <li><%= f.label :end_date %><%= f.text_field :end_date %></li>
-  <li><%= f.label :next_start_date %><%= f.text_field :next_start_date %></li>
-  <li><%= f.label :next_end_date %><%= f.text_field :next_end_date %></li>
+  <li><%= f.label :start_date %><%= f.text_field :start_date, :class => 'date_picker', :readonly => 'readonly' %></li>
+  <li><%= f.label :end_date %><%= f.text_field :end_date, :class => 'date_picker', :readonly => 'readonly' %></li>
+  <li><%= f.label :next_start_date %><%= f.text_field :next_start_date, :class => 'date_picker', :readonly => 'readonly' %></li>
+  <li><%= f.label :next_end_date %><%= f.text_field :next_end_date, :class => 'date_picker', :readonly => 'readonly' %></li>
   <li><%= f.submit %></li>
 </ol>
 <% end %>
