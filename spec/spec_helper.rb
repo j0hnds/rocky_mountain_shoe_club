@@ -7,6 +7,7 @@ require 'spec/rails'
 
 require 'factory_girl'
 require 'factories/factory_girl_factories'
+require 'lib/show_dates'
 
 # Uncomment the next line to use webrat's matchers
 require 'webrat/integrations/rspec-rails'
