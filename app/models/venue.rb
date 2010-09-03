@@ -1,4 +1,5 @@
 class Venue < ActiveRecord::Base
+  include ValidationConstants
   has_many :shows
 
   validates_presence_of :name, :address_1, :city, :state, :postal_code, :phone, :fax, :reservation

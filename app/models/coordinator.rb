@@ -1,5 +1,6 @@
 require 'lib/validation_constants'
 class Coordinator < ActiveRecord::Base
+  include ValidationConstants
   has_many :shows
 
   validates_presence_of :first_name, :last_name, :email, :phone
