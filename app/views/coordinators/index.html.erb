@@ -12,7 +12,7 @@ Coordinators
   </thead>
   <tbody>
     <% @coordinators.each do | coordinator | %>
-    <tr>
+    <tr id="coordinator_<%= coordinator.id -%>">
       <td><%= link_to(format_name(coordinator), edit_coordinator_path(coordinator)) -%></td>
       <td><%= coordinator.phone -%></td>
       <td><%= coordinator.email -%></td>
