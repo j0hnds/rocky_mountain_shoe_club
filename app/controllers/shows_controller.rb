@@ -1,5 +1,5 @@
 class ShowsController < ApplicationController
-  layout "main"
+  layout "main", :only => [ :index ]
 
   def index
     @shows = Show.all
@@ -15,10 +15,12 @@ class ShowsController < ApplicationController
   def create
     @show = Show.new(params[:show])
     if @show.save
-      flash[:notice] = "Successfully saved"
-      redirect_to shows_path
+      @shows = Show.all
+      success_stickie("You have successfully created a new show")
+      render :action => :success
     else
-      render :action => 'new'
+      error_on_create_messages(@show)
+      render :action => :failure
     end
   end
 
@@ -32,10 +34,12 @@ class ShowsController < ApplicationController
     @show = Show.find(params[:id])
 
     if @show.update_attributes(params[:show])
-      flash[:notice] = "Show successfully updated"
-      redirect_to shows_path
+      @shows = Show.all
+      success_stickie("You have successfully updated a show")
+      render :action => :success
     else
-      render :action => "edit"
+      error_on_create_messages(@show)
+      render :action => :failure
     end
   end
 end

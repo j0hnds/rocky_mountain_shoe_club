@@ -1,5 +1,5 @@
 class VenuesController < ApplicationController
-  layout "main"
+  layout "main", :only => [ :index ]
 
   def index
     @venues = Venue.all
@@ -12,10 +12,12 @@ class VenuesController < ApplicationController
   def create
     @venue = Venue.new(params[:venue])
     if @venue.save
-      flash[:notice] = "Successfully saved"
-      redirect_to venues_path
+      @venues = Venue.all
+      success_stickie("Successfully created venue")
+      render :action => :success
     else
-      render :action => 'new'
+      error_on_create_messages(@venue)
+      render :action => :failure
     end
   end
 
@@ -27,10 +29,12 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
 
     if @venue.update_attributes(params[:venue])
-      flash[:notice] = "Venue successfully updated"
-      redirect_to venues_path
+      @venues = Venue.all
+      success_stickie("Successfully updated venue")
+      render :action => :success
     else
-      render :action => "edit"
+      error_on_create_messages(@venue)
+      render :action => :failure
     end
   end
 end

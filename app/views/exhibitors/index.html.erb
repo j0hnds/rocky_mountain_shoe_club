@@ -1,28 +1,13 @@
 <% content_for :title do %>
 Exhibitors
 <% end %>
+<% content_for :bottom_load_js do %>
+  <%= javascript_include_tag "exhibitors" %>
+<% end %>
 <div class="header">Exhibitors</div>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Fax</th>
-      <th>Cell</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @exhibitors.each do | exhibitor | %>
-    <tr id="exhibitor_<%= exhibitor.id -%>">
-      <td><%= link_to(format_name(exhibitor), edit_exhibitor_path(exhibitor)) -%></td>
-      <td><%= format_address(exhibitor) -%></td>
-      <td><%= exhibitor.email -%></td>
-      <td><%= exhibitor.phone -%></td>
-      <td><%= exhibitor.fax -%></td>
-      <td><%= exhibitor.cell -%></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="button_wrapper">
+  <%= link_to 'Add Exhibitor', new_exhibitor_path, :class => 'button insert' %>
+</div>
+<div id="exhibitors_list">
+  <%= render :partial => "exhibitors_list" %>
+</div>

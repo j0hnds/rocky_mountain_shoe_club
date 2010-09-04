@@ -1,0 +1,13 @@
+$('#record_manager').fadeOut('fast',function() {
+  $(this).empty();
+  $('#module_messages')
+      .html("<%=escape_javascript(render_stickies)%>")
+      .pulse({
+              callback : function(){
+                      $('#shows_list')
+                              .css('display','none')
+                              .html("<%= escape_javascript(render(:partial => "shows_list")) %>")
+                              .fadeIn('fast');
+              }
+      });
+});

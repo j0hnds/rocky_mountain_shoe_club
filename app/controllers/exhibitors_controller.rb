@@ -1,6 +1,6 @@
 class ExhibitorsController < ApplicationController
 
-  layout "main"
+  layout "main", :only => [ :index ]
 
   def index
     @exhibitors = Exhibitor.all
@@ -13,10 +13,12 @@ class ExhibitorsController < ApplicationController
   def create
     @exhibitor = Exhibitor.new(params[:exhibitor])
     if @exhibitor.save
-      flash[:notice] = "Successfully saved"
-      redirect_to exhibitors_path
+      @exhibitors = Exhibitor.all
+      success_stickie("You have successfully created an exhibitor")
+      render :action => :success
     else
-      render :action => 'new'
+      error_on_create_messages(@exhibitor)
+      render :action => :failure
     end
   end
 
@@ -28,10 +30,12 @@ class ExhibitorsController < ApplicationController
     @exhibitor = Exhibitor.find(params[:id])
 
     if @exhibitor.update_attributes(params[:exhibitor])
-      flash[:notice] = "Exhibitor successfully updated"
-      redirect_to exhibitors_path
+      @exhibitors = Exhibitor.all
+      success_stickie("You have successfully updated an exhibitor")
+      render :action => :success
     else
-      render :action => "edit"
+      error_on_create_messages(@exhibitor)
+      render :action => :failure
     end
   end
 end

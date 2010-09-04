@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Fax</th>
+      <th>Cell</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @exhibitors.each do | exhibitor | %>
+    <tr id="exhibitor_<%= exhibitor.id -%>">
+      <td><%= link_to('Edit', edit_exhibitor_path(exhibitor), :class => 'button_small insert') -%></td>
+      <td><%= format_name(exhibitor) -%></td>
+      <td><%= format_address(exhibitor) -%></td>
+      <td><%= exhibitor.email -%></td>
+      <td><%= exhibitor.phone -%></td>
+      <td><%= exhibitor.fax -%></td>
+      <td><%= exhibitor.cell -%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

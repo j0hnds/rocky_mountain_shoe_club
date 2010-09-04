@@ -1,30 +1,13 @@
 <% content_for :title do %>
 Shows
 <% end %>
+<% content_for :bottom_load_js do %>
+  <%= javascript_include_tag "shows" %>
+<% end %>
 <div class="header">Shows</div>
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Coordinator</th>
-      <th>Venue</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Next Start Date</th>
-      <th>Next End Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @shows.each do | show | %>
-    <tr id="show_<%= show.id -%>">
-      <td><%= link_to(show.description, edit_show_path(show)) -%></td>
-      <td><%= format_name(show.coordinator) -%></td>
-      <td><%= show.venue.name -%></td>
-      <td><%= format_date(show.start_date) -%></td>
-      <td><%= format_date(show.end_date) -%></td>
-      <td><%= format_date(show.next_start_date) -%></td>
-      <td><%= format_date(show.next_end_date) -%></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="button_wrapper">
+  <%= link_to 'Add Show', new_show_path, :class => 'button insert' %>
+</div>
+<div id="shows_list">
+  <%= render :partial => "shows_list" %>
+</div>
