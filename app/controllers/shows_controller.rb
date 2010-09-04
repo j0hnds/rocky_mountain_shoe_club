@@ -42,4 +42,18 @@ class ShowsController < ApplicationController
       render :action => :failure
     end
   end
+
+  def show
+    @show = Show.find(params[:id])
+  end
+
+  def destroy
+    @show = Show.find(params[:id])
+    @show.delete
+    @shows = Show.all
+    success_stickie("You have successfully deleted a show")
+    render :action => :success
+  end
+
+
 end

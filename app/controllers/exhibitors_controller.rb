@@ -38,4 +38,16 @@ class ExhibitorsController < ApplicationController
       render :action => :failure
     end
   end
+  
+  def show
+    @exhibitor = Exhibitor.find(params[:id])
+  end
+
+  def destroy
+    @exhibitor = Exhibitor.find(params[:id])
+    @exhibitor.delete
+      @exhibitors = Exhibitor.all
+    success_stickie("You have successfully deleted an exhibitor")
+    render :action => :success
+  end
 end

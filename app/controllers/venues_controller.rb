@@ -37,4 +37,18 @@ class VenuesController < ApplicationController
       render :action => :failure
     end
   end
+
+  def show
+    @venue = Venue.find(params[:id])
+  end
+
+  def destroy
+    @venue = Venue.find(params[:id])
+    @venue.delete
+    @venues = Venue.all
+    success_stickie("You have successfully deleted a venue")
+    render :action => :success
+  end
+
+
 end

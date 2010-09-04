@@ -39,4 +39,16 @@ class CoordinatorsController < ApplicationController
     end
   end
 
+  def show
+    @coordinator = Coordinator.find(params[:id])
+  end
+
+  def destroy
+    @coordinator = Coordinator.find(params[:id])
+    @coordinator.delete
+    @coordinators = Coordinator.all
+    success_stickie("You have successfully deleted a coordinator")
+    render :action => :success
+  end
+
 end

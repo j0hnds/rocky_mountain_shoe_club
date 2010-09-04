@@ -1,0 +1,6 @@
+<% form_for @venue, :html => { :method => :delete, :class => 'auxilliary ajaxed' } do |f| %>
+<ol>
+  <li>Delete venue <%= @venue.name -%></li>
+  <li><%= f.submit -%></li>
+</ol>
+<% end %>

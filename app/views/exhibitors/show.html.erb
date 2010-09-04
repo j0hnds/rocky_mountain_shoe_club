@@ -1,0 +1,6 @@
+<% form_for @exhibitor, :html => { :method => :delete, :class => 'auxilliary ajaxed' } do |f| %>
+<ol>
+  <li>Delete exhibitor: <%= format_name(@exhibitor) -%></li>
+  <li><%= f.submit -%></li>
+</ol>
+<% end %>

@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>&nbsp;</th>
+      <th>&nbsp;</th>
       <th>Name</th>
       <th>Address</th>
       <th>Email</th>
@@ -14,6 +15,7 @@
     <% @exhibitors.each do | exhibitor | %>
     <tr id="exhibitor_<%= exhibitor.id -%>">
       <td><%= link_to('Edit', edit_exhibitor_path(exhibitor), :class => 'button_small insert') -%></td>
+      <td><%= link_to('Delete', exhibitor_path(exhibitor), :class => 'button_small insert') -%></td>
       <td><%= format_name(exhibitor) -%></td>
       <td><%= format_address(exhibitor) -%></td>
       <td><%= exhibitor.email -%></td>

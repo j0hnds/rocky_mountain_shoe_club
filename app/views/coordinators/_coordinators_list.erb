@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>&nbsp;</th>
+      <th>&nbsp;</th>
       <th>Name</th>
       <th>Phone</th>
       <th>Email</th>
@@ -11,6 +12,7 @@
     <% @coordinators.each do | coordinator | %>
     <tr id="coordinator_<%= coordinator.id -%>">
       <td><%= link_to('Edit', edit_coordinator_path(coordinator), :class => 'button_small insert') -%></td>
+      <td><%= link_to('Delete', coordinator_path(coordinator), :class => 'button_small insert') -%></td>
       <td><%= format_name(coordinator) -%> </td>
       <td><%= coordinator.phone -%></td>
       <td><%= coordinator.email -%></td>
