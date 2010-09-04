@@ -14,6 +14,18 @@ Factory.define :coordinator do |f|
   f.email "#{first_name}.#{last_name}@email.com"
 end
 
+Factory.define :exhibitor do |f|
+  first_name = Factory.next :name
+  last_name = Factory.next :name
+  f.first_name first_name
+  f.last_name last_name
+  f.address_1 '123 Main Street'
+  f.city 'San Francisco'
+  f.state 'CA'
+  f.postal_code '90911-111'
+  f.email "#{first_name}.#{last_name}@mail.com"
+end
+
 Factory.define :venue do |f|
   f.name Factory.next :name
   f.address_1 Factory.next :name
