@@ -1,0 +1,178 @@
+/* --------------------------------------------------------------------- */
+/* BUTTONS */
+/* --------------------------------------------------------------------- */
+
+/*
+
+	BUTTON MARKUP
+	-------------------------------------------------------------
+	Any of the following will be rendered as a "button"
+	
+	<button>[button text]</button>
+	
+	<input type="submit" class="button" value="[button text]"/>
+	
+	<input type="button" class="button" value="[button text]"/>
+	
+	<a href="#" class="button">[button text]</a>
+	
+	BUTTON GROUP MARKUP
+	-------------------------------------------------------------
+	Each <li/> will be treated as a button and there will be
+	no spacing between them. Pagination is the best
+	example of it's use
+	
+	<ul class="pagination">
+		<li><span>&#171;</span></li>
+		<li><span>1</span></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">&#187;</a></li>
+	</ul>
+
+*/
+
+.button_small, button, .button {
+	white-space:nowrap;
+	text-align:center;
+	display:block;
+	float:left;
+	height:20px;
+	line-height:18px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#cfd8e2 #c1cad3 #c1cad3 #cfd8e2;
+	padding:0 10px;
+	cursor:pointer;
+	margin:0;
+	font-size:12px;
+	font-weight:normal;
+	background:#d7e2ee url("/images/interface/button_gradients.gif") 0 0 repeat-x;
+	color:#264C73;
+	-moz-border-radius:5px;
+  -webkit-border-radius:5px;
+	-webkit-box-shadow:0 1px 1px #FFF;
+	-moz-box-shadow:0 1px 1px #FFF;
+	text-shadow:1px 1px 1px #FFF;
+	}
+.table_input input.button_small {
+	border-width:1px;
+	background:#d7e2ee url("/images/interface/button_gradients.gif") 0 0 repeat-x;
+	}
+.pushed {
+	background:#d7e2ee url("/images/interface/button_gradients.gif") 0 -18px repeat-x;
+	}
+/*
+button:hover, .button:hover, .button_small:hover {
+	color:#F90 !important;
+	border-color:#F90 !important;
+	}
+*/
+a.button:hover, a.button_small:hover {
+	color:inherit !important;
+	}
+a.button, a.button:link, a.button:visited {
+	text-decoration:none;
+	display:block;
+	height:18px;
+	}
+.button_small {
+	line-height:14px;
+	font-size:9px;
+	font-weight:bold;
+	cursor:pointer;
+	text-transform:uppercase;
+	margin:0 5px 0 0;
+	padding:0 5px;
+	}
+a.button_small, button.button_small {
+	height:13px;
+	}
+input.button_small {
+	height:16px;
+	}
+.beta button, .beta .button {
+	margin-right:4px;
+	}
+.gamma button, .gamma .button {
+	margin-left:4px;
+	}
+.alpha button, .alpha .button {
+	margin:0 2px;
+	}
+input.button, input.button_small {
+	width:auto;
+	}
+.button_wrapper {
+	overflow:hidden;
+	margin-top:10px;
+	height:22px;
+	}
+.button_wrapper button,.button_wrapper .button,.button_wrapper a.button,.button_wrapper a.button_small {
+	margin-right:4px;
+	}
+.button.default, .button_small.default {
+	font-weight:bold;
+	}
+.button.disabled, .button_small.disabled/* , .button.disabled:hover, .button_small.disabled:hover */ {
+	color:#cfd8e2 !important;
+	border-color:#cfd8e2;
+	cursor:default;
+	}
+.table_input input.button_small {
+	border-width:1px;
+	}
+
+/* Button Group */
+
+.pagination {
+	list-style:none;
+	height:20px;
+	margin:0;
+	padding:0;
+	}
+.pagination li {
+	float:left;
+	margin:0 !important;
+	}
+.pagination li span, .pagination li a, .pagination li a:link, .pagination li a:visited {
+	background:#d7e2ee url("/images/interface/button_gradient.gif") repeat-x;
+	text-decoration:none;
+	display:block;
+	float:left;
+	padding:0 5px;
+	line-height:18px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#cfd8e2 #c1cad3 #c1cad3 #cfd8e2;
+	color:#264C73;
+	-webkit-box-shadow:0 1px 1px #FFF;
+	-moz-box-shadow:0 1px 1px #FFF;
+	height:18px;
+	font-size:11px;
+	}
+.pagination li span {
+	color:#666 !important;
+	cursor:default;
+	}
+.pagination li.previous span, .pagination li.previous a {
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-topleft:5px;
+  -webkit-border-bottom-left-radius:5px;
+  -webkit-border-top-left-radius:5px;
+	}
+.pagination li.next span, .pagination li.next a {
+	-moz-border-radius-bottomright:5px;
+	-moz-border-radius-topright:5px;
+  -webkit-border-bottom-right-radius:5px;
+  -webkit-border-top-right-radius:5px;
+	}
+
+/* Browser Hacks */
+
+/* FireFox */
+@-moz-document url-prefix() {
+	.button,button,a.button,input {
+		height:20px;
+		}
+}

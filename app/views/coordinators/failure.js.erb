@@ -1,0 +1,8 @@
+/* Scroll to top of page */
+$('html, body').animate({scrollTop:0}, 'normal');
+
+/* Display error message */
+$('#module_messages')
+        .css('display','block')
+	.html("<%=escape_javascript(render_stickies)%>")
+	//.pulse();

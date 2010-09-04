@@ -1,4 +1,4 @@
-<% form_for @coordinator do | f | %>
+<% form_for @coordinator, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
 <ol>
   <li><%= f.label :first_name %><%= f.text_field :first_name %></li>
   <li><%= f.label :last_name %><%= f.text_field :last_name %></li>

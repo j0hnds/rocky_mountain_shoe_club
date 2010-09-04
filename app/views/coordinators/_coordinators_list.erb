@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @coordinators.each do | coordinator | %>
+    <tr id="coordinator_<%= coordinator.id -%>">
+      <td><%= link_to('Edit', edit_coordinator_path(coordinator), :class => 'button_small insert') -%></td>
+      <td><%= format_name(coordinator) -%> </td>
+      <td><%= coordinator.phone -%></td>
+      <td><%= coordinator.email -%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

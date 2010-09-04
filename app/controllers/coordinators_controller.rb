@@ -1,6 +1,6 @@
 class CoordinatorsController < ApplicationController
   
-  layout "main"
+  layout "main", :only => [ :index ]
   
   def index
     @coordinators = Coordinator.all
@@ -13,10 +13,12 @@ class CoordinatorsController < ApplicationController
   def create
     @coordinator = Coordinator.new(params[:coordinator])
     if @coordinator.save
-      flash[:notice] = "Successfully saved"
-      redirect_to coordinators_path
+      @coordinators = Coordinator.all
+      success_stickie("You have successfully created a new coordinator")
+      render :action => :success
     else
-      render :action => 'new'      
+      error_on_create_messages(@coordinator)
+      render :action => :failure
     end
   end
   
@@ -28,10 +30,13 @@ class CoordinatorsController < ApplicationController
     @coordinator = Coordinator.find(params[:id])
     
     if @coordinator.update_attributes(params[:coordinator])
-      flash[:notice] = "Coordinator successfully updated"
-      redirect_to coordinators_path
+      @coordinators = Coordinator.all
+      success_stickie("Coordinator successfully updated")
+      render :action => :success
     else
-      render :action => "edit"
+      error_on_create_messages(@coordinator)
+      render :action => :failure
     end
   end
+
 end

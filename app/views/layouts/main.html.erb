@@ -1,6 +1,11 @@
 <html>
   <%= render :partial => "/layouts/head"%>
   <body>
+    <%= render_stickies({:id => "module_messages"}) %>
+    <div id="record_manager"></div>
     <%= yield %>
+
+    <!-- LOAD SCRIPTS -->
+    <%= yield :bottom_load_js %>
   </body>
 </html>
