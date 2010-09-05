@@ -1,8 +1,18 @@
 class ShowsController < ApplicationController
+
+  before_filter :search_term, :only => [ :index, :search ]
+
   layout "main", :only => [ :index ]
 
   def index
-    @shows = Show.all
+    @shows = show_list
+  end
+
+  # This will be called via Ajax to replace the exhibitor list with the
+  # filtered list.
+  def search
+    @shows = show_list
+    render :action => :success
   end
 
   def new
@@ -15,7 +25,7 @@ class ShowsController < ApplicationController
   def create
     @show = Show.new(params[:show])
     if @show.save
-      @shows = Show.all
+      @shows = show_list
       success_stickie("You have successfully created a new show")
       render :action => :success
     else
@@ -34,7 +44,7 @@ class ShowsController < ApplicationController
     @show = Show.find(params[:id])
 
     if @show.update_attributes(params[:show])
-      @shows = Show.all
+      @shows = show_list
       success_stickie("You have successfully updated a show")
       render :action => :success
     else
@@ -50,10 +60,15 @@ class ShowsController < ApplicationController
   def destroy
     @show = Show.find(params[:id])
     @show.delete
-    @shows = Show.all
+    @shows = show_list
     success_stickie("You have successfully deleted a show")
     render :action => :success
   end
 
+  private
+
+  def show_list
+    Show.search_for(@search_term).ordered
+  end
 
 end

@@ -16,4 +16,7 @@ class Venue < ActiveRecord::Base
   validates_length_of :phone, :maximum => 12, :allow_blank => true
   validates_length_of :fax, :maximum => 12, :allow_blank => true
   validates_length_of :reservation, :maximum => 12, :allow_blank => true
+
+  named_scope :search_for, lambda { | search_term | { :conditions => [ "UPPER(name) like ?", "#{search_term}%" ] } unless search_term.blank? }
+  named_scope :ordered, :order => "name ASC"
 end

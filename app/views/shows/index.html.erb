@@ -5,8 +5,16 @@ Shows
   <%= javascript_include_tag "shows" %>
 <% end %>
 <div class="header">Shows</div>
-<div class="button_wrapper">
-  <%= link_to 'Add Show', new_show_path, :class => 'button insert' %>
+<div>
+  <div class="button_wrapper">
+    <%= link_to 'Add Show', new_show_path, :class => 'button insert' %>
+  </div>
+  <% form_tag '/shows/search', :id => 'search_form', :class => 'ajaxed' do %>
+    <% field_set_tag do %>
+      <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
+      <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+    <% end %>
+  <% end %>
 </div>
 <div id="shows_list">
   <%= render :partial => "shows_list" %>

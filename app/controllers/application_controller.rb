@@ -15,4 +15,18 @@ class ApplicationController < ActionController::Base
     model_instance.errors.each{|key,value| puts "!!! #{value}"; error_stickie("#{value}")}
   end
 
+  def search_term
+    if params.has_key?(:search)
+      @search_term = params[:search]
+      session[search_term_key] = @search_term
+    else
+      @search_term = session[search_term_key]
+    end
+  end
+
+  def search_term_key
+    controller = params[:controller]
+    "#{controller}_search_term".to_sym
+  end
+  
 end

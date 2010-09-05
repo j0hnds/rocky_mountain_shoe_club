@@ -5,8 +5,16 @@ Exhibitors
   <%= javascript_include_tag "exhibitors" %>
 <% end %>
 <div class="header">Exhibitors</div>
-<div class="button_wrapper">
-  <%= link_to 'Add Exhibitor', new_exhibitor_path, :class => 'button insert' %>
+<div>
+  <div class="button_wrapper">
+    <%= link_to 'Add Exhibitor', new_exhibitor_path, :class => 'button insert' %>
+  </div>
+  <% form_tag '/exhibitors/search', :id => 'search_form', :class => 'ajaxed' do %>
+    <% field_set_tag do %>
+      <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
+      <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+    <% end %>
+  <% end %>
 </div>
 <div id="exhibitors_list">
   <%= render :partial => "exhibitors_list" %>

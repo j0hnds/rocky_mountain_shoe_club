@@ -1,8 +1,18 @@
 class VenuesController < ApplicationController
+
+  before_filter :search_term, :only => [ :index, :search ]
+
   layout "main", :only => [ :index ]
 
   def index
-    @venues = Venue.all
+    @venues = venue_list
+  end
+
+  # This will be called via Ajax to replace the exhibitor list with the
+  # filtered list.
+  def search
+    @venues = venue_list
+    render :action => :success
   end
 
   def new
@@ -12,7 +22,7 @@ class VenuesController < ApplicationController
   def create
     @venue = Venue.new(params[:venue])
     if @venue.save
-      @venues = Venue.all
+      @venues = venue_list
       success_stickie("Successfully created venue")
       render :action => :success
     else
@@ -29,7 +39,7 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
 
     if @venue.update_attributes(params[:venue])
-      @venues = Venue.all
+      @venues = venue_list
       success_stickie("Successfully updated venue")
       render :action => :success
     else
@@ -45,10 +55,15 @@ class VenuesController < ApplicationController
   def destroy
     @venue = Venue.find(params[:id])
     @venue.delete
-    @venues = Venue.all
+    @venues = venue_list
     success_stickie("You have successfully deleted a venue")
     render :action => :success
   end
 
+  private
+
+  def venue_list
+    Venue.search_for(@search_term).ordered
+  end
 
 end
