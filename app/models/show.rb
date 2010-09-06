@@ -3,6 +3,8 @@ class Show < ActiveRecord::Base
   include ShowDates
   belongs_to :coordinator
   belongs_to :venue
+  has_many :exhibitor_registrations
+  has_many :exhibitors, :through => :exhibitor_registrations
 
   validates_presence_of :description, :coordinator_id, :venue_id, :start_date, :end_date, :next_start_date, :next_end_date
   validates_length_of :description, :maximum => 40, :allow_blank => true

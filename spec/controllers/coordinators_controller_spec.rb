@@ -41,7 +41,7 @@ describe CoordinatorsController do
     coordinator.phone.should == '303-333-3333'
     coordinator.email.should == 'jim.jones@mail.com'
 
-    response.should redirect_to(coordinators_path)
+    response.should render_template(:success)
   end
 
   it "should report errors when no valid data is passed to create the coordinator" do
@@ -57,7 +57,7 @@ describe CoordinatorsController do
     coordinator.phone.should == '303-abc-3333'
     coordinator.email.should == 'jim.jonesmail.com'
 
-    response.should render_template(:new)
+    response.should render_template(:failure)
   end
 
   it "should load the appropriate coordinator when asked to edit" do
@@ -96,7 +96,7 @@ describe CoordinatorsController do
     coordinator.phone.should == '999-999-9999'
     coordinator.email.should == 'jim.jones@mail.com'
 
-    response.should redirect_to(coordinators_path)
+    response.should render_template(:success)
   end
 
   it "should error out when modifying a coordinator record with bad values" do
@@ -119,7 +119,7 @@ describe CoordinatorsController do
     coordinator.phone.should == '999-abc-9999'
     coordinator.email.should == 'jim.jonesmail.com'
 
-    response.should render_template(:edit)
+    response.should render_template(:failure)
   end
 
 end

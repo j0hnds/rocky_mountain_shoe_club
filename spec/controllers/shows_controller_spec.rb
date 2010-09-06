@@ -79,7 +79,7 @@ describe ShowsController do
     show.next_start_date.should == Date.parse('2011-03-05')
     show.next_end_date.should == Date.parse('2011-03-06')
 
-    response.should redirect_to(shows_path)
+    response.should render_template(:success)
   end
 
   it "should report errors when no valid data is passed to create the show" do
@@ -105,7 +105,7 @@ describe ShowsController do
     show.next_start_date.should be nil
     show.next_end_date.should be nil
 
-    response.should render_template(:new)
+    response.should render_template(:failure)
   end
 
   it "should load the appropriate show when asked to edit" do
@@ -168,7 +168,7 @@ describe ShowsController do
     show.next_start_date.should == Date.parse('2010-01-03')
     show.next_end_date.should == Date.parse('2010-01-04')
 
-    response.should redirect_to(shows_path)
+    response.should render_template(:success)
   end
 
   it "should error out when modifying a show record with bad values" do
@@ -200,7 +200,7 @@ describe ShowsController do
     show.next_start_date.should be nil
     show.next_end_date.should be nil
 
-    response.should render_template(:edit)
+    response.should render_template(:failure)
   end
 
 

@@ -53,7 +53,7 @@ describe VenuesController do
     venue.fax.should == '202-222-2222'
     venue.reservation.should == '888-888-8888'
 
-    response.should redirect_to(venues_path)
+    response.should render_template(:success)
   end
 
   it "should report errors when no valid data is passed to create the venue" do
@@ -81,7 +81,7 @@ describe VenuesController do
     venue.fax.should == '202--2222'
     venue.reservation.should == '-888-8888'
 
-    response.should render_template(:new)
+    response.should render_template(:failure)
   end
 
   it "should load the appropriate venue when asked to edit" do
@@ -136,7 +136,7 @@ describe VenuesController do
     venue.fax.should == '123-123-1234'
     venue.reservation.should == '321-321-3210'
 
-    response.should redirect_to(venues_path)
+    response.should render_template(:success)
   end
 
   it "should error out when modifying a venue record with bad values" do
@@ -170,7 +170,7 @@ describe VenuesController do
     venue.fax.should == '123--1234'
     venue.reservation.should == '-321-3210'
 
-    response.should render_template(:edit)
+    response.should render_template(:failure)
   end
 end
 

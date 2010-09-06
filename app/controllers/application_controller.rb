@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def error_on_create_messages(model_instance, name=nil)
     obj_name = (name) ? name : model_instance.class.human_name
     error_stickie("<strong>Could not create a new #{obj_name} because of the following problems:</strong>")
-    model_instance.errors.each{|key,value| puts "!!! #{value}"; error_stickie("#{value}")}
+    model_instance.errors.each{|key,value| error_stickie("#{value}")}
   end
 
   def search_term

@@ -47,7 +47,7 @@ describe ExhibitorsController do
     exhibitor.state.should == 'GA'
     exhibitor.postal_code.should == '90999'
 
-    response.should redirect_to(exhibitors_path)
+    response.should render_template(:success)
   end
 
   it "should report errors when no valid data is passed to create the exhibitor" do
@@ -70,7 +70,7 @@ describe ExhibitorsController do
     exhibitor.state == ''
     exhibitor.postal_code == ''
 
-    response.should render_template(:new)
+    response.should render_template(:failure)
   end
 
   it "should load the appropriate exhibitor when asked to edit" do
@@ -112,7 +112,7 @@ describe ExhibitorsController do
     exhibitor.phone.should == '999-999-9999'
     exhibitor.email.should == 'jim.jones@mail.com'
 
-    response.should redirect_to(exhibitors_path)
+    response.should render_template(:success)
   end
 
   it "should error out when modifying an exhibitor record with bad values" do
@@ -136,7 +136,7 @@ describe ExhibitorsController do
     exhibitor.phone.should == '999-abc-9999'
     exhibitor.email.should == 'jim.jonesmail.com'
 
-    response.should render_template(:edit)
+    response.should render_template(:failure)
   end
 end
 

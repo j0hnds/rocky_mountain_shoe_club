@@ -1,6 +1,9 @@
 class Exhibitor < ActiveRecord::Base
   include ValidationConstants
 
+  has_many :exhibitor_registrations
+  has_many :shows, :through => :exhibitor_registrations
+
   validates_presence_of :first_name, :last_name, :address_1, :city, :state, :postal_code
   validates_format_of :postal_code, :with => POSTAL_CODE_REGEX, :allow_blank => true
   validates_format_of :email, :with => EMAIL_REGEX, :allow_blank => true
