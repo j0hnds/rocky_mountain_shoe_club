@@ -1,0 +1,18 @@
+<% content_for :top_selection_bar do %>
+<% form_tag '/shows/change', :id => 'switch-form' do %>
+  <% field_set_tag do %>
+    <%= select_tag 'current_show', options_for_select(show_options(@shows), @current_show.id), :id => 'auto-switch', :onchange => 'this.form.submit();' %>
+  <% end %>
+<% end %>
+<% end %>
+<h1>Dashboard</h1>
+<!-- Build up a menu of functionality to be exposed -->
+
+<ul>
+  <li>Administration<ul>
+      <li><%= link_to 'Shows', shows_path -%></li>
+      <li><%= link_to 'Coordinators', coordinators_path -%></li>
+      <li><%= link_to 'Venues', venues_path -%></li>
+      <li><%= link_to 'Exhibitors', exhibitors_path -%></li>
+    </ul></li>
+</ul>

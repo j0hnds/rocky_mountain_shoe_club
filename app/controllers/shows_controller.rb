@@ -1,6 +1,7 @@
 class ShowsController < ApplicationController
 
   before_filter :search_term, :only => [ :index, :search ]
+  skip_before_filter :must_have_current_show, :only => [ :change ]
 
   layout "main", :only => [ :index ]
 
@@ -63,6 +64,13 @@ class ShowsController < ApplicationController
     @shows = show_list
     success_stickie("You have successfully deleted a show")
     render :action => :success
+  end
+
+  def change
+    show = Show.find(params[:current_show])
+    set_current_show(show)
+
+    redirect_to '/'
   end
 
   private

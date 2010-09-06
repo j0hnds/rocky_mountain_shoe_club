@@ -11,7 +11,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
-  
+
+  map.resource :dashboard, :controller => 'dashboard'
   map.resources :venues
   map.resources :coordinators
   map.resources :shows
@@ -37,6 +38,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
+  map.root :controller => 'dashboard', :action => 'show'
 
   # See how all your routes lay out with "rake routes"
 
