@@ -18,5 +18,7 @@ class Show < ActiveRecord::Base
 
     self.next_start_date = next_show_date(self.end_date)
     self.next_end_date = self.next_start_date + 1.day
+
+    self.description = self.start_date.strftime '%B %Y'
   end
 end

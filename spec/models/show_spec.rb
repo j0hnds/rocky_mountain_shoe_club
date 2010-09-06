@@ -49,6 +49,7 @@ describe Show do
     @show.venue_id = 1
     @show.set_default_dates(Date.parse('2010-09-01'))
     @show.valid?.should be true
+    @show.description = 'September 2010'
     @show.start_date.should == Date.parse('2010-09-11')
     @show.end_date.should == Date.parse('2010-09-12')
     @show.next_start_date.should == Date.parse('2011-03-05')
