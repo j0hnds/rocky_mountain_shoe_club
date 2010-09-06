@@ -9,6 +9,7 @@
       <th>Phone</th>
       <th>Fax</th>
       <th>Cell</th>
+      <th>In Show</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
       <td><%= exhibitor.phone -%></td>
       <td><%= exhibitor.fax -%></td>
       <td><%= exhibitor.cell -%></td>
+      <td><%= exhibitor_in_show(exhibitor, @current_show) -%></td>
     </tr>
     <% end %>
   </tbody>

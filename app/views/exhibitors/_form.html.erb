@@ -11,6 +11,7 @@
   <li><%= f.label :phone %><%= f.text_field :phone %></li>
   <li><%= f.label :fax %><%= f.text_field :fax %></li>
   <li><%= f.label :cell %><%= f.text_field :cell %></li>
+  <li><%= hidden_field_tag 'include_in_show', 'no' -%><%= label_tag 'include_in_show', 'In show?' -%><%= check_box_tag 'include_in_show', 'yes', exhibitor_is_in_show(@exhibitor, @current_show) -%></li>
   <li><%= f.submit %></li>
 </ol>
 <% end %>

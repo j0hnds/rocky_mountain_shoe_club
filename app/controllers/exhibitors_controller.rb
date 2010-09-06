@@ -38,6 +38,17 @@ class ExhibitorsController < ApplicationController
   def update
     @exhibitor = Exhibitor.find(params[:id])
 
+    include_in_show = params[:include_in_show] == 'yes'
+
+    if include_in_show
+      registration = ExhibitorRegistration.new(:show => @current_show)
+      @exhibitor.exhibitor_registrations << registration
+    else
+      # Find the registration to be removed
+      registration = @exhibitor.exhibitor_registrations.detect { |r| r.show_id == @current_show.id }
+      registration.delete if registration
+    end
+
     if @exhibitor.update_attributes(params[:exhibitor])
       @exhibitors = exhibitor_list
       success_stickie("You have successfully updated an exhibitor")
