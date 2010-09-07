@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100906133141) do
+ActiveRecord::Schema.define(:version => 20100907135252) do
 
   create_table "coordinators", :force => true do |t|
     t.string   "first_name", :limit => 40, :null => false
@@ -52,6 +52,20 @@ ActiveRecord::Schema.define(:version => 20100906133141) do
     t.date     "end_date",                      :null => false
     t.date     "next_start_date",               :null => false
     t.date     "next_end_date",                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stores", :force => true do |t|
+    t.string   "name",        :limit => 40, :null => false
+    t.string   "address_1",   :limit => 40, :null => false
+    t.string   "address_2",   :limit => 40
+    t.string   "city",        :limit => 40, :null => false
+    t.string   "state",       :limit => 2,  :null => false
+    t.string   "postal_code", :limit => 11, :null => false
+    t.string   "phone",       :limit => 12
+    t.string   "fax",         :limit => 12
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
