@@ -45,3 +45,11 @@ Factory.define :show do |f|
   f.next_start_date Date.today + 180.days
   f.next_end_date Date.today + 181.days
 end
+
+Factory.define :store do |f|
+  f.name Factory.next :name
+  f.address_1 Factory.next :name
+  f.city 'San Francisco'
+  f.state 'CA'
+  f.postal_code '80111'
+end

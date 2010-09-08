@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Fax</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do | store | %>
+    <tr id="store_<%= store.id -%>">
+      <td><%= link_to('Edit', edit_store_path(store), :class => 'button_small insert') -%></td>
+      <td><%= link_to('Delete', store_path(store), :class => 'button_small insert') -%></td>
+      <td><%= store.name -%> </td>
+      <td><%= format_address(store) -%></td>
+      <td><%= store.phone -%></td>
+      <td><%= store.fax -%></td>
+      <td><%= store.email -%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

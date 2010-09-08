@@ -1,0 +1,21 @@
+<% content_for :title do %>
+Stores
+<% end %>
+<% content_for :bottom_load_js do %>
+  <%= javascript_include_tag "stores" %>
+<% end %>
+<div class="header">Stores</div>
+<div>
+  <div class="button_wrapper">
+    <%= link_to 'Add Store', new_store_path, :class => 'button insert' %>
+  </div>
+  <% form_tag '/stores/search', :id => 'search_form', :class => 'ajaxed' do %>
+    <% field_set_tag do %>
+      <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
+      <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+    <% end %>
+  <% end %>
+</div>
+<div id="stores_list">
+  <%= render :partial => "stores_list" %>
+</div>
