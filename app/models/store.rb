@@ -1,6 +1,8 @@
 class Store < ActiveRecord::Base
   include ValidationConstants
 
+  has_many :buyers
+
   validates_presence_of :name, :address_1, :city, :state, :postal_code
   validates_format_of :postal_code, :with => POSTAL_CODE_REGEX, :allow_blank => true
   validates_format_of :phone, :with => PHONE_REGEX, :allow_blank => true
