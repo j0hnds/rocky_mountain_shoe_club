@@ -53,3 +53,13 @@ Factory.define :store do |f|
   f.state 'CA'
   f.postal_code '80111'
 end
+
+# Pass in a store
+Factory.define :buyer do |f|
+  first_name = Factory.next :name
+  last_name = Factory.next :name
+  f.first_name first_name
+  f.last_name last_name
+  f.phone '101-111-1111'
+  f.email "#{first_name}.#{last_name}@mail.com"
+end
