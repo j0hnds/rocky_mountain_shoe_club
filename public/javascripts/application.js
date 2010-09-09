@@ -10,6 +10,7 @@ $(function(){
     if(!$.fn.pulse){$.require('jquery/jquery.pulse.js');}
     if(!$.idleTimer){$.require('jquery/jquery.idle-timer.js');}
     if(!$.simpleConfirm){$.require('jquery/jquery.simpleConfirm.js');}
+    if(!$.simpleInsert){$.require('jquery/jquery.simpleInsert.js');}
 
     // Add javascript request type
     $.ajaxSetup({
