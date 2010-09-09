@@ -1,0 +1,10 @@
+<% form_for @buyer, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do |f| %>
+<ol>
+  <li><%= f.label :store_id %><%= f.select :store_id, store_options(@stores) %></li>
+  <li><%= f.label :first_name %><%= f.text_field :first_name %></li>
+  <li><%= f.label :last_name %><%= f.text_field :last_name %></li>
+  <li><%= f.label :phone %><%= f.text_field :phone %></li>
+  <li><%= f.label :email %><%= f.text_field :email %></li>
+  <li><%= f.submit -%></li>
+</ol>
+<% end %>

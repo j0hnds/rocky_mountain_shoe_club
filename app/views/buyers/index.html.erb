@@ -1,0 +1,21 @@
+<% content_for :title do %>
+Buyers
+<% end %>
+<% content_for :bottom_load_js do %>
+  <%= javascript_include_tag "buyers" %>
+<% end %>
+<div class="header">Buyers</div>
+<div>
+  <div class="button_wrapper">
+    <%= link_to 'Add Buyer', new_buyer_path, :class => 'button insert' %>
+  </div>
+  <% form_tag '/buyers/search', :id => 'search_form', :class => 'ajaxed' do %>
+    <% field_set_tag do %>
+      <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
+      <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+    <% end %>
+  <% end %>
+</div>
+<div id="buyers_list">
+  <%= render :partial => "buyers_list" %>
+</div>

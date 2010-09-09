@@ -1,6 +1,7 @@
 <html>
   <%= render :partial => "/layouts/head"%>
   <body>
+    <div><%= link_to 'Home', root_path, :class => 'button' -%></div>
     <%= yield :top_selection_bar %>
     <div>Current show: <%= @current_show.description -%></div>
     <%= render_stickies({:id => "module_messages"}) %>

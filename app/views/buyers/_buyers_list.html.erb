@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Store</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @buyers.each do | buyer | %>
+    <tr id="buyer_<%= buyer.id -%>">
+      <td><%= link_to('Edit', edit_buyer_path(buyer), :class => 'button_small insert') -%></td>
+      <td><%= link_to('Delete', buyer_path(buyer), :class => 'button_small insert') -%></td>
+      <td><%= format_name(buyer) -%> </td>
+      <td><%= format_store(buyer.store) -%></td>
+      <td><%= buyer.phone -%></td>
+      <td><%= buyer.email -%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
