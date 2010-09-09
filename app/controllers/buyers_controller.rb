@@ -23,9 +23,15 @@ class BuyersController < ApplicationController
   def create
     @buyer = Buyer.new(params[:buyer])
     if @buyer.save
-      @buyers = buyer_list
       success_stickie("You have successfully created a new buyer")
-      render :action => :success
+      if params[:form_location] == 'store_add'
+        @store = @buyer.store
+        @buyers = buyer_list(@buyer.store)
+        render :action => :store_success
+      else
+        @buyers = buyer_list
+        render :action => :success
+      end
     else
       error_on_create_messages(@buyer)
       render :action => :failure
@@ -41,8 +47,8 @@ class BuyersController < ApplicationController
     @buyer = Buyer.find(params[:id])
     
     if @buyer.update_attributes(params[:buyer])
-      @buyers = buyer_list
       success_stickie("You have successfully updated a buyer")
+      @buyers = buyer_list
       render :action => :success
     else
       error_on_create_messages(@buyer)
@@ -64,7 +70,8 @@ class BuyersController < ApplicationController
 
   private
 
-  def buyer_list
-    Buyer.search_for(@search_term).ordered
+  def buyer_list(store=nil)
+    (store) ? store.buyers.ordered : Buyer.search_for(@search_term).ordered
   end
+
 end

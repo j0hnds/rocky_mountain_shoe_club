@@ -1,0 +1,10 @@
+  $('#module_messages')
+      .html("<%=escape_javascript(render_stickies)%>")
+      .pulse({
+              callback : function(){
+                      $('#store_buyers_list')
+                              .css('display','none')
+                              .html("<%= escape_javascript(render(:partial => "store_buyers_list")) %>")
+                              .fadeIn('fast');
+              }
+      });

@@ -12,3 +12,25 @@
   <li><%= f.submit %></li>
 </ol>
 <% end %>
+<% unless @store.new_record? %>
+<hr/>
+<div>Store Buyers</div>
+  <% form_tag buyers_path, :id => 'add_buyer_form', :class => 'ajaxed' do %>
+    <% field_set_tag do %>
+    <%= hidden_field_tag 'form_location', 'store_add' -%>
+    <%= hidden_field_tag 'buyer[store_id]', @store.id -%>
+      <ol>
+	<li><%= label_tag 'buyer[first_name]' -%><%= text_field_tag 'buyer[first_name]' -%></li>
+	<li><%= label_tag 'buyer[last_name]' -%><%= text_field_tag 'buyer[last_name]' -%></li>
+	<li><%= label_tag 'buyer[phone]' -%><%= text_field_tag 'buyer[phone]' -%></li>
+	<li><%= label_tag 'buyer[email]' -%><%= text_field_tag 'buyer[email]' -%></li>
+	<li><%= submit_tag -%></li>
+    <% end %>
+  <% end %>
+
+  <hr/>
+
+<div id="store_buyers_list">
+  <%= render :partial => '/buyers/store_buyers_list' -%>  
+</div>
+<% end %>
