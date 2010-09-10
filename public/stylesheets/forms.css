@@ -1,0 +1,239 @@
+/* --------------------------------------------------------------------- */
+/* FORMS */
+/* --------------------------------------------------------------------- */
+
+/*
+
+	FORM MARKUP
+	-------------------------------------------------------------
+	
+	<form action="#" method="#">
+	
+		<fieldset>
+			<label for="input_id">[field name]</label>
+			<input type="text" id="input_id" name="input_id"/>
+			
+			<label for="select_id">[field name]</label>
+			<select id="select_id" name="select_id">
+				<option value="[value]">[label]</option>
+				...
+			</select>
+			
+			<span class="label">[field group name]</span>
+			<ul class="input">
+				<li><input type="[radio/checkbox]" id="input_id" name="input_id"/> <label for="input_id">[field name]</label></li>
+				<li><input type="[radio/checkbox]" id="input_id" name="input_id"/> <label for="input_id">[field name]</label></li>
+				<li><input type="[radio/checkbox]" id="input_id" name="input_id"/> <label for="input_id">[field name]</label></li>
+			</ul>
+			
+			<span class="label">[field name]</span>
+			<div class="table_input">
+				<table>
+					<tbody>
+						<tr>
+							<td><input type="checkbox"/></td>
+							<td>[attribute]</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"/></td>
+							<td>[attribute]</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"/></td>
+							<td>[attribute]</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<fieldset class="button_wrapper">
+				<input type="submit" class="button" value="Submit"/>
+			</fieldset>
+			
+		</fieldset>
+		
+	</form>
+
+*/
+
+input, .input, select, textarea, label, .label {
+	display:block;
+	width:200px;
+	text-align:left;
+	}
+.input {
+	width:auto;
+	margin-top:0 !important;
+	}
+.no_label {
+	margin-top:10px !important;
+	}
+.input li {
+	list-style:none !important;
+	}
+label,.label {
+	margin-top:10px;
+	}
+.input label {
+	margin-top:0;
+	font-size:11px;
+	}
+label.note, label .note, .label .note {
+	font-size:11px;
+	color:#999;
+	line-height:inherit;
+	font-weight:normal;
+	}
+.input input, .input label {
+	width:auto;
+	display:inline;
+	margin-right:5px;
+	}
+.table_input {
+	border-width:1px;
+	border-style:solid;
+	border-color:#c1cad3 #dae3ec #dae3ec #c1cad3;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-box-shadow:0 1px 2px #FFF;
+	-moz-box-shadow:0 1px 2px #FFF;
+	padding:1px;
+	background:#FFF;
+	height:150px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	}
+.table_input input {
+	width:auto;
+	border-width:0;
+	background:transparent;
+	}
+.table_input label {
+	display:inline;
+	margin:0;
+	}
+.table_input table {
+	border-width:0 !important;
+	}
+.text .table_input table {
+	margin:0 !important;
+	}
+.search_input {
+	background:#EFEFEF;
+	width:50%;
+	padding:4px 1px;
+	border-width:1px 1px 0 1px;
+	border-color:#E7E7E7;
+	border-style:solid;
+	-webkit-border-top-right-radius:5px;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-topright:5px;
+	-moz-border-radius-topleft:5px;
+	}
+.search_input input {
+	margin:0 4px;
+	}
+.table_display, .auxiliary table {
+	width:auto;
+	border-width:1px;
+	border-style:solid;
+	border-color:#c1cad3 #dae3ec #dae3ec #c1cad3;
+	background:#FFF;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-box-shadow:0 1px 2px #FFF;
+	-moz-box-shadow:0 1px 2px #FFF;
+	padding:1px;
+	}
+.auxiliary table {
+	width:100%;
+	}
+.table_display table {
+	border-width:0;
+	}
+textarea, input {
+	font-size:12px;
+	color:#666;
+	background:#FFF url("/images/interface/text_background.gif") 0 0 repeat-x;
+	border-width:1px;
+	border-style:solid;
+	border-color:#c1cad3 #dae3ec #dae3ec #c1cad3;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-box-shadow:0 1px 2px #FFF;
+	-moz-box-shadow:0 1px 2px #FFF;
+	line-height:20px;
+	padding:0 5px;
+	}
+.input input {
+	border-width:0;
+	background:transparent;
+	}
+input[type="hidden"]{
+	display:none !important;
+	}
+input[disabled="disabled"],input[disabled="true"], input.disabled {
+	background:#F6F9FB;
+	color:#999;
+	border-color:#dae3ec;
+	}
+input.button.disabled:hover, input.button_small.disabled:hover {
+	color:#999 !important;
+	border-color:#CCC !important;
+	cursor:default;
+	}
+input[type="text"],input[type="password"] {
+	outline:none;
+	}
+input[type="text"]:focus,input[type="password"]:focus {
+	border-color:#F90 !important;
+	}
+input.temp {
+	color:#999;
+	font-style:italic;
+	}
+td input {
+	width:auto;
+	}
+td input[type=text] {
+	width:90%;
+	}
+td textarea {
+	width:90%;
+	}
+fieldset.separate {
+	border-top:1px solid #CCC;
+	margin-top:20px;
+	}
+.required {
+	font-weight:bold;
+	}
+.pathway_negative label, .pathway_negative input {
+	display:inline;
+	width:auto;
+	}
+.temp_label {
+	color:#999 !important;
+	font-style:italic;
+	}
+input[type="file"] {
+	background:none;
+	padding:0;
+	border-width:0;
+	}
+.bar input {
+	height:18px;
+	}
+.bar input.button {
+	height:20px;
+	}
+label.inline {
+	font-style:italic;
+	font-size:11px;
+	color:#999;
+	padding-left:5px;
+	position:relative;
+	display:none;
+	z-index:2;
+	overflow:hidden;
+	}

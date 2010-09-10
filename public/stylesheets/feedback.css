@@ -1,0 +1,42 @@
+#feedback_wrapper {
+	margin:0 -10px;
+	position:relative;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-bottom-color:#d6d6d6;
+	}
+#feedback {
+	display:none;
+	padding:25px;
+	background:#FFF url("/images/interface/page_gradient.gif") 0 1px repeat-x;
+	}
+#feedback_tab {
+	position:absolute;
+	bottom:-26px;
+	right:10px;
+	height:25px;
+	border-width:0 1px 1px 1px;
+	border-style:solid;
+	border-color:#e7e7e7 #d6d6d6 #d6d6d6 #e7e7e7;
+	background-color:#FFF;
+	-webkit-border-bottom-right-radius:5px;	
+	-webkit-border-bottom-left-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	display:none;
+	}
+#feedback_tab a {
+	display:block;
+	padding:0 10px 0 25px;
+	line-height:25px;
+	background-color:transparent;
+	background-image:url("/images/icons/down.gif");
+	background-position:5px 50%;
+	background-repeat:no-repeat;
+	}
+.open #feedback_tab a {
+	background-image:url("/images/icons/up.gif");
+	}
+#feedback h2 {
+	font-size:16px;
+	}

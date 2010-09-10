@@ -1,6 +1,6 @@
 <% form_for @store, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
-<ol>
-  <li><%= f.label :name %><%= f.text_field :name %></li>
+<% field_set_tag do %>
+  <%= f.label :name %><%= f.text_field :name %>
   <li><%= f.label :address_1 %><%= f.text_field :address_1 %></li>
   <li><%= f.label :address_2 %><%= f.text_field :address_2 %></li>
   <li><%= f.label :city %><%= f.text_field :city %></li>
@@ -11,6 +11,7 @@
   <li><%= f.label :fax %><%= f.text_field :fax %></li>
   <li><%= f.submit %></li>
 </ol>
+<% end %>
 <% end %>
 <% unless @store.new_record? %>
 <hr/>

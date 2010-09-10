@@ -1,13 +1,40 @@
 <html>
   <%= render :partial => "/layouts/head"%>
-  <body>
-    <div><%= link_to 'Home', root_path, :class => 'button' -%></div>
-    <%= yield :top_selection_bar %>
-    <div>Current show: <%= @current_show.description -%></div>
-    <%= render_stickies({:id => "module_messages"}) %>
-    <div id="record_manager"></div>
-    <%= yield %>
+  <body id="app_body">
 
+    <!-- DOCUMENT WRAPPER -->
+    <div id="doc3"
+	 <!-- HEADER WRAPPER -->
+	 <div id="hd">
+	   <ul id="breadcrumbs">
+	     <li>
+	       <%= link_to 'Home', root_path, :class => 'button' -%>
+               <%= yield :breadcrumbs -%>
+	     </li>
+              <%= yield :top_selection_bar %>
+           </ul>
+         <!-- END OF HEADER WRAPPER -->
+	 </div>
+      <!-- BODY WRAPPER -->
+      <div id="bd">
+	<div id="page_header">
+	  <h1><%= yield :title -%></h1>
+	  <p>For show: <%= @current_show.description -%></p>
+	</div>
+
+	<%= render :partial => "layouts/nav_bar" %>
+
+	<%= render_stickies({:id => "module_messages"}) %>
+
+	<div id="record_manager"></div>
+
+	<%= yield %>
+
+      <!-- END OF BODY WRAPPER -->
+      </div>
+
+    <!-- END OF DOCUMENT WRAPPER -->
+    </div>
     <!-- LOAD SCRIPTS -->
     <%= yield :bottom_load_js %>
   </body>

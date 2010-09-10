@@ -1,0 +1,150 @@
+/* --------------------------------------------------------------------- */
+/* GENERAL */
+/* --------------------------------------------------------------------- */
+
+html {
+	background:#FFF;
+	color:#333;
+	}
+h1 {
+	font-size:170%;
+	padding-bottom:0;
+	text-shadow:1px 2px 1px #FFF;
+	}
+em {
+	font-style:italic;
+	}
+strong,.bold {
+	font-weight:bold;
+	}
+.search_hit {
+	color:#FFF;
+	font-weight:bold;
+	background:#F90;
+	}
+.emphasis {
+	font-style:italic;
+	}
+
+/* Table/List alternating rows */
+
+.even td,.alternate li.even {
+	background-color:#E6EEF7;
+	}
+.odd .asc,.odd .desc {
+	background-color:#EDF3FA;
+	}
+.even .asc,.even .desc {
+	background-color:#DDE4ED;
+	}
+
+/* Link colors */
+
+a, a:link, a:visited {
+	color:#264C73;
+	text-decoration:none;
+	}
+a:hover {
+	color:#F90 !important;
+	}
+
+/* Headers */
+
+h1, h2, .bar h3, .bar h4, .bar h5, .bar h6 {
+	color:#617e9b;
+	}
+
+/* Link hover */
+
+a:hover, #app_body a:hover {
+	color:#333;
+	}
+
+/* --------------------------------------------------------------------- */
+/* TABLES */
+/* --------------------------------------------------------------------- */
+
+table {
+	background:#FFF;
+	width:100%;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	}
+th img, td img {
+	vertical-align:middle;
+	}
+th {
+	font-weight:bold;
+	}
+th, td {
+	font-size:95%;
+	line-height:130% !important;
+	padding:5px !important;
+	vertical-align:top;
+	padding:0 5px;
+	text-align:left;
+	border-width:0;
+	}
+thead th, thead td {
+	border-bottom:1px solid #EFEFEF !important;
+	}
+tr.hover td {
+	color:#000;
+	}
+col.break_right {
+	border-right:1px solid #CCC
+	}
+col.break_left {
+	border-left:1px solid #CCC
+	}
+col.break_both {
+	border-width:0 1px;
+	border-style:solid;
+	border-color:#CCC;
+	}
+tfoot td, tfoot th {
+	font-weight:bold;
+	border-top:1px solid #CCC !important;
+	}
+table.left td, table.left th {
+	text-align:left;
+	}
+table td.left, table th.left {
+	text-align:left !important;
+	}
+table.center td, table.center th {
+	text-align:center;
+	}
+table td.center, table th.center {
+	text-align:center !important;
+	}
+table.right td, table.right th {
+	text-align:right;
+	}
+table td.right, table th.right {
+	text-align:right !important;
+	}
+
+/* --------------------------------------------------------------------- */
+/* BODY */
+/* --------------------------------------------------------------------- */
+
+#bd {
+	margin:0 -10px;
+	background:#FFF url("/images/interface/page_gradient.gif") 0 1px repeat-x;
+	padding:10px 10px 30px 10px;
+	}
+#app_body #bd {
+	background:#FFF url("/images/interface/page_gradient.gif") 0 1px repeat-x;
+	}
+
+/* --------------------------------------------------------------------- */
+/* FOOTER */
+/* --------------------------------------------------------------------- */
+
+#ft {
+	text-align:center;
+	font-size:10px;
+	color:#999;
+	padding:15px 0 0 0;
+	}

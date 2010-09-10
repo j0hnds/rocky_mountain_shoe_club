@@ -12,5 +12,12 @@
 */
 
 @import url("custom-theme/jquery-ui-1.7.custom.css");
-@import url("buttons.css");
+@import url("base.css");
+@import url("forms.css");
+@import url("header_breadcrumbs.css");
 @import url("messages.css");
+@import url("buttons.css");
+@import url("panels.css");
+@import url("grid.css");
+@import url("tooltip.css");
+@import url("feedback.css");

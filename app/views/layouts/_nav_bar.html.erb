@@ -1,0 +1,20 @@
+<% return if @skip_navigation_panel -%>
+
+<!-- NAVIGATION -->
+
+<div class="panel" id="navbar">
+
+  <div class="bar">
+
+    <ul class="beta links">
+      <li><%= link_to 'Shows', shows_path, :title => "Manage Shows", :class => "tip#{menu_item_selected('shows')}" -%></li>
+      <li><%= link_to 'Coordinators', coordinators_path, :title => "Manage Coordinators", :class => "tip#{menu_item_selected('coordinators')}" -%></li>
+      <li><%= link_to 'Venues', venues_path, :title => "Manage Venues", :class => "tip#{menu_item_selected('venues')}" -%></li>
+      <li><%= link_to 'Exhibitors', exhibitors_path, :title => "Manage Exhibitors", :class => "tip#{menu_item_selected('exhibitors')}" -%></li>
+      <li><%= link_to 'Stores', stores_path, :title => "Manage Stores", :class => "tip#{menu_item_selected('stores')}" -%></li>
+      <li><%= link_to 'Buyers', buyers_path, :title => "Manage Buyers", :class => "tip#{menu_item_selected('buyers')}" -%></li>
+    </ul>
+
+  </div>
+
+</div>

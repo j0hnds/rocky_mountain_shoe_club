@@ -1,0 +1,164 @@
+/* --------------------------------------------------------------------- */
+/* HEADER/BREADCRUMBS */
+/* --------------------------------------------------------------------- */
+
+/*
+
+	HEADER/BREADCRUMB MARKUP
+	-------------------------------------------------------------
+	
+	<div id="hd">
+		<ul id="breadcrumbs">
+			<li>
+				<a href="/dash" id="logo" title="return to abaqis&reg; dashboard"><img src="/images/clear.gif" alt="abaqis&reg; logo"/></a>
+
+				<ul>
+					<li>
+						<a href="#">path</a>
+
+						<ul>
+							<li>
+								<a href="#">to</a>
+
+								<ul>
+									<li class="last"><span><% default_content_for :title do -%>[page name]<% end -%></span></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+*/
+
+#hd {
+	line-height:45px;
+	margin:0 -10px;
+	color:#FFF;
+	text-shadow:0 0 4px #274c74;
+	border-bottom:1px solid #2e4e70;
+	height:45px;
+	}
+#dashboard #hd img {
+	position:absolute;
+	top:0;
+	left:0;
+	}
+#hd p {
+	position:absolute;
+	top:0;
+	left:140px;
+	color:#f3f3f3;
+	}
+#hd p a, #hd p a:link, #hd p a:visited {
+	text-decoration:none;
+	color:#FFF;
+	}
+#hd p a:hover {
+	color:#333;
+	}
+
+/* Home Switch */
+
+#hd form {
+	position:absolute;
+	top:0;
+	right:0;
+	height:45px;
+	padding-right:10px;
+	float:right;
+	}
+#hd label {
+	color:#CCC;
+	font-style:italic;
+	position:absolute;
+	top:0;
+	right:200px;
+	width:120px;
+	margin:0;
+	}
+#hd input {
+	position:absolute;
+	top:0;
+	right:10px;
+	height:20px;
+	line-height:20px;
+	float:left;
+	margin:12px 0 0 10px;
+	}
+#hd select {
+	position:absolute;
+	top:0;
+	right:10px;
+	margin:12px 0 0 10px;
+	}
+#hd form #home {
+	width:250px;
+	border-width:0;
+	color:#666;
+	}
+
+/* Breadcrumbs */
+
+#breadcrumbs ul {
+	padding-left:10px;
+	}
+#breadcrumbs ul, #breadcrumbs li, #breadcrumbs li a, #breadcrumbs li span {
+	height:45px;
+	line-height:45px;
+	display:block;
+	float:left;
+	}
+#breadcrumbs li li a, #breadcrumbs li li a:link, #breadcrumbs li li a:visited, #breadcrumbs li li span {
+	font-weight:bold;
+	padding-left:25px;
+	}
+#breadcrumbs li li a:hover {
+	color:#333;
+	}
+#hd, #breadcrumbs li.last {
+	background:#617e9b url("/images/interface/header_background.gif") repeat-x;
+	}
+#dashboard #hd {
+	background:#999 url("/images/interface/crumbs_background.gif") repeat-x;
+	}
+#breadcrumbs li {
+	background:url("/images/interface/crumbs_background.gif") repeat-x;
+	}
+#breadcrumbs li li a, #breadcrumbs li li a:link, #breadcrumbs li li a:visited {
+	background:url("/images/interface/mid_arrow.gif") no-repeat;
+	color:#C2D9ED;
+	}
+#breadcrumbs em {
+	font-style:normal;
+	color:#FFF;
+	font-weight:bold;
+	}
+#breadcrumbs li li a:hover, #breadcrumbs li li a:hover em {
+	color:#333;
+	}
+#breadcrumbs li li span {
+	background:url("/images/interface/end_arrow.gif") no-repeat;
+	}
+#logo, #logo img {
+	width:124px;
+	height:45px;
+	}
+#logo {
+	background:url("/images/interface/logo.gif");
+	}
+
+/* --------------------------------------------------------------------- */
+/* PAGE HEADER */
+/* --------------------------------------------------------------------- */
+
+#page_header {
+	text-align:center;
+	}
+
+
+#auto-switch-label {
+	color:#FFF !important;
+	}

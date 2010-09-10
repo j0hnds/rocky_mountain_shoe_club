@@ -1,0 +1,23 @@
+/**
+ * GRID SKIN
+ */
+
+.grid_header_table th,.grid_header_table td,.grid_data_table th,.grid_data_table td,.grid_footer_table th,.grid_footer_table td {
+	border-top-width:0;
+	background-image:url("/images/interface/cell_right_border.gif");
+	background-repeat:repeat-y;
+	background-position:100% 0;
+	}
+.grid_header_table th,.grid_header_table td,.grid_footer_table th,.grid_footer_table td {
+	border-width:0 !important;
+	}
+.grid_header_wrapper,.grid_footer_wrapper {
+	border-style:solid;
+	border-color:#C1CAD3;
+	} 
+.grid_header_wrapper {
+	border-width:0 0 1px 0;
+	}
+.grid_footer_wrapper {
+	border-width:1px 0 0 0;
+	}

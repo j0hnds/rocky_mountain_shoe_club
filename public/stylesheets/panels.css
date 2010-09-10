@@ -1,0 +1,612 @@
+/* --------------------------------------------------------------------- */
+/* PANELS */
+/* --------------------------------------------------------------------- */
+
+/*
+
+	BAR MARKUP
+	-------------------------------------------------------------
+
+	<div class="bar">
+
+		<!-- center justified -->
+		<h[2-6] class="alpha">[optional header]</h[1-6]>
+
+		<!-- left justified -->
+		<div class="beta">
+			<a href="#" class="button">[button name]</a> <!-- may also use <input/> or <button/> -->
+		</div>
+
+		<!-- right justified -->
+		<div class="gamma">
+			<a href="#" class="button">[button name]</a>
+		</div>
+
+	</div>
+
+
+	PANEL MARKUP
+	-------------------------------------------------------------
+
+	<div class="panel">
+
+		<!--optional .bar goes here -->
+
+		<div class="content text"> <!-- .text class adds optional padding -->
+			<!--content here-->
+		</div>
+
+		<!--optional .bar goes here -->
+
+	</div>
+
+
+	TABBED PANEL MARKUP
+	-------------------------------------------------------------
+
+	<div class="tabbed_panels">
+
+		<div class="tabs">
+			<ul>
+				<li><a href="#first_panel_name">[tab/panel name]</a></li>
+				<li><a href="#second_panel_name">[tab/panel name]</a></li>
+			</ul>
+		</div>
+
+		<div class="panel" id="first_panel_name">
+
+			<!--optional .bar goes here -->
+
+			<div class="content text">
+				<a name="first_panel_name"></a>
+				[panel content]
+			</div>
+
+			<!--optional .bar goes here -->
+
+		</div>
+
+		<div class="panel" id="second_panel_name">
+
+			<!--optional .bar goes here -->
+
+			<div class="content text">
+				<a name="second_panel_name"></a>
+				[panel content]
+			</div>
+
+			<!--optional .bar goes here -->
+
+		</div>
+
+	</div>
+
+
+	AUXILIARY PANEL MARKUP
+	-------------------------------------------------------------
+
+	<div class="auxiliary">
+
+		<form id="add_record" class="aux_panel" style="display:none">
+
+			<h2>[panel title]</h2>
+
+			<fieldset>
+
+				<!-- form fields here -->
+
+				<fieldset class="button_wrapper">
+					<input type="submit" class="button" value="Submit"/>
+					<a href="#add_record" class="button toggle">Cancel</a>
+				</fieldset>
+
+			</fieldset>
+
+		</form>
+
+	</div>
+
+	<!-- Corresponding .panel goes here -->
+
+*/
+
+.panel {
+	border:1px solid #666;
+	padding:0 4px 4px 4px;
+	margin-top:1em;
+	background:#d7e2ee url("/images/interface/gradient.gif") 0 0 repeat-x;
+	border-color:#dae3ec #c1cad3 #c1cad3 #dae3ec;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-webkit-box-shadow:0 0 3px #EFEFEF;
+	-moz-box-shadow:0 0 3px #EFEFEF;
+	_height:0; /* IE Sucks, hack we must! */
+	}
+.pad {
+	padding:10px;
+	}
+
+/* Panel cap/foot */
+
+.bar {
+	padding-top:20px;
+	margin-top:4px;
+	color:#264C73;
+	position:relative;
+	}
+.bar .beta, .bar .alpha, .bar .gamma {
+	line-height:20px;
+	position:absolute;
+	top:0;
+	height:20px;
+	}
+.bar .alpha {
+	font-size:12px;
+	left:0;
+	text-align:center;
+	width:100%;
+	}
+.bar .beta {
+	left:0;
+	}
+.bar .gamma {
+	right:0;
+	}
+.bar h1.alpha, .bar h2.alpha, .bar h3.alpha, .bar h4.alpha, .bar h5.alpha, .bar h6.alpha,
+.bar h1.beta, .bar h2.beta, .bar h3.beta, .bar h4.beta, .bar h5.beta, .bar h6.beta,
+.bar h1.gamma, .bar h2.gamma, .bar h3.gamma, .bar h4.gamma, .bar h5.gamma, .bar h6.gamma {
+	font-size:18px;
+	font-weight:normal;
+	text-shadow:1px 1px 1px #FFF;
+	}
+.bar form, .bar fieldset, .bar label, .bar input, .bar select {
+	float:left;
+	}
+.bar label {
+	padding-right:5px;
+	margin:0;
+	width:auto;
+	}
+
+/* Nav menu */
+
+.bar .links a {
+	margin:0 8px;
+	text-shadow:1px 1px 1px #FFF;
+	}
+.bar .links li {
+	position:relative;
+	float:left;
+	padding-right:2px;
+	background:url("/images/interface/nav_separator.gif") 100% 0 no-repeat;
+	}
+.bar .links li a.selected {
+	color:#666 !important;
+	font-style:italic;
+	cursor:default;
+	}
+#navbar {
+	position:relative;
+	z-index:99;
+	}
+
+/* --------------------------------------------------------------------- */
+/* PANEL CONTENTS */
+/* --------------------------------------------------------------------- */
+
+.content {
+	text-align:left;
+	background:#FFF;
+	border-width:1px;
+	border-style:solid;
+	border-color:#c1cad3 #cfd8e2 #cfd8e2 #c1cad3;
+	-webkit-box-shadow:0 1px 1px #FFF;
+	-moz-box-shadow:0 1px 1px #FFF;
+	margin-top:4px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	padding:1px;
+	}
+.content table {
+	background:#FFF;
+	margin:0;
+	}
+.content thead th, .content thead td {
+	border-bottom-width:2px;
+	border-bottom-style:solid;
+	border-bottom-color:#cfd8e2;
+	}
+.content thead th a {
+	display:block;
+	padding-left:11px;
+	background:url("/images/interface/sort_arrows.gif") 0 50% no-repeat;
+	}
+.content thead th a.asc {
+	background:url("/images/interface/sort_arrows_desc.gif") 0 50% no-repeat;
+	}
+.content thead th a.desc {
+	background:url("/images/interface/sort_arrows_asc.gif") 0 50% no-repeat;
+	}
+
+/* Dashboard */
+
+#dashboard .content {
+	overflow:auto;
+	}
+
+/* --------------------------------------------------------------------- */
+/* TEXT PANEL */
+/* --------------------------------------------------------------------- */
+
+.text {
+	padding:0 10px 10px 10px;
+	}
+.content.text h2 {
+	font-size:150%;
+	background:#f1f4f8;
+	text-align:left;
+	margin:1px -9px 0 -9px;
+	padding-left:8px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	text-shadow:1px 1px 1px #FFF;
+	}
+.text h3 {
+	font-size:140%;
+	border-bottom:1px solid #f3f3f3;
+	margin-left:-10px;
+	margin-right:-10px;
+	padding-left:10px;
+	}
+.text h4 {
+	font-size:115%; 
+	font-weight:bold; 
+	}
+.text h5 {
+	font-size:110%; 
+	font-weight:bold; 
+	}
+.text h2,.text h3,.text h4,.text h5,.text h6 {
+	margin-top:1em;
+	}
+.text abbr,.text acronym {
+	border-bottom:1px dotted #666;
+	cursor:help;
+	} 
+.text p, .aux_panel p, .text address {
+	margin-top:1em;
+	}
+.text em {
+	font-style:italic;
+	}
+.text del {
+	text-decoration:line-through;
+	}
+.text blockquote,.text ul,.text ol,.text dl {
+	margin-top:1em;
+	}
+.text ol,.text ul,.text dl {
+	margin-left:2em;
+	}
+.text ol li {
+	list-style:decimal outside;
+	}
+.text ul li {
+	list-style:disc outside;
+	}
+.text li ol, .text li ul {
+	margin-top:0;
+	}
+.text dl dd {
+	margin-left:1em;
+	}
+.text table {
+	margin-top:1em !important;
+	}
+.text .col_date {
+	width:10%;
+	}
+.text .col_status {
+	width:25%;
+	}
+.text .col_source {
+	width:20%;
+	}
+.text .col_comment {
+	width:30%;
+	}
+
+/* --------------------------------------------------------------------- */
+/* AUXILIARY PANEL */
+/* --------------------------------------------------------------------- */
+
+#record_manager {
+	position:relative;
+	}
+.auxiliary {
+	border-width:1px;
+	border-style:solid;
+	border-color:#cfd8e2 #c1cad3 #c1cad3 #cfd8e2;
+	padding:0 10px 10px 10px;
+	background-color:#F3F6F9;
+	background-image:url("/images/interface/aux_highlight.gif");
+	background-position:0 0;
+	background-repeat:repeat-x;
+	margin-top:1em;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-webkit-box-shadow:0 0 3px #EFEFEF;
+	-moz-box-shadow:0 0 3px #EFEFEF;
+	}
+.auxiliary h2 {
+	font-size:130%;
+	}
+.auxiliary h3 {
+	font-size:120%;
+	}
+.auxiliary h2, .auxiliary h3, .auxiliary h4, .auxiliary h5, .auxiliary h6, .auxiliary blockquote, .auxiliary	ul, .auxiliary ol, .auxiliary dl {
+	margin-top:1em;
+	}
+.auxiliary h2, .auxiliary h3, .auxiliary h4, .auxiliary h5, .auxiliary h6 {
+	text-shadow:1px 1px 1px #FFF;
+	}
+.auxiliary dt {
+	margin-top:10px;
+	}
+.auxiliary dd {
+	font-weight:bold;
+	padding-left:15px;
+	}
+.auxiliary dt ul, .auxiliary dd ul {
+	margin-top:0;
+	padding-left:18px;
+	}
+.auxiliary dt li, .auxiliary dd li {
+	list-style:disc;
+	}
+.closeButton {
+	cursor:pointer;
+	width:21px;
+	height:21px;
+	position:absolute;
+	top:10px;
+	right:10px;
+	background:url("/images/interface/close_button.gif");
+	}
+
+/* --------------------------------------------------------------------- */
+/* TABBED PANELS */
+/* --------------------------------------------------------------------- */
+
+.tabbed_panels {
+	margin-top:1em;
+	}
+.tabbed_panels .panel {
+	margin-top:0;
+	-webkit-border-top-left-radius:0;	
+	-moz-border-radius-topleft:0;
+	background-image:none !important;
+	}
+.tabbed_panels .tabs,.tabbed_panels .tabs ul {
+	height:23px;
+	}
+.tabbed_panels .tabs li {
+	height:24px;
+	float:left;
+	margin-right:4px;
+	}
+.tabbed_panels .tabs li a, .tabbed_panels .tabs li a:link, .tabbed_panels .tabs li a:visited {
+	text-decoration:none;
+	padding:0 10px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#cfd8e2 #c1cad3 #cfd8e2 #cfd8e2;
+	display:block;
+	float:left;
+	line-height:22px;
+	background:#f1f4f8 url("/images/interface/aux_highlight.gif") 0 0 repeat-x;
+	-webkit-border-top-right-radius:5px;	
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	height:22px;
+	}
+.tabbed_panels .tabs li a:hover {
+	color:#333;
+	}
+.tabbed_panels .tabs li a.selected, .tabbed_panels .tabs li a.selected:link, .tabbed_panels .tabs li a.selected:visited, .tabbed_panels .tabs li a.selected:hover {
+	background-color:#d7e2ee !important;
+	background-image:url("/images/interface/gradient.gif") !important;
+	background-repeat:repeat-x;
+	border-bottom-color:#d7e2ee !important;
+	color:#333 !important	;
+	}
+
+/* --------------------------------------------------------------------- */
+/* KEY */
+/* --------------------------------------------------------------------- */
+
+.key {
+	margin:10px 0 0 0 !important;
+	overflow:hidden;
+	}
+.key li {
+	list-style:none !important;
+	float:left;
+	margin-right:20px;
+	}
+
+/* --------------------------------------------------------------------- */
+/* ASSESSMENT PANEL */
+/* --------------------------------------------------------------------- */
+
+.assessment ol, .assessment ul {
+	margin:5px 0 0 0;
+	}
+.assessment ol {
+	padding-left:35px;
+	}
+.assessment li {
+	_height:0;
+	padding:5px;
+	}
+.assessment li li {
+	border-width:0;
+	padding:0;
+	}
+.assessment li input, .assessment li label {
+	float:none;
+	width:auto;
+	display:inline;
+	font-size:11px;
+	}
+.assessment li input {
+	margin-right:5px;
+	}
+.assessment ul li {
+	list-style-type:none;
+	}
+.assessment ol ol li {
+	list-style-type:lower-alpha;
+	margin-bottom:5px;
+	}
+.assessment ol ol li p {
+	font-style:italic;
+	}
+.assessment ol ol li li {
+	margin-bottom:0;
+	}
+.assessment ol ol ul li {
+	list-style-type:none;
+	}
+.assessment li p {
+	margin-top:0;
+	}
+.assessment .comment_toggle {
+	vertical-align:text-top;
+	cursor:pointer;
+	}
+.assessment .comment {
+	margin:5px 0 0 0;
+	width:300px;
+	height:100px;
+	}
+.skipAdvisory {
+	padding:5px 10px;
+	border-width:2px;
+	border-style:solid;
+	-moz-border-radius:5px;
+  -webkit-border-radius:5px;
+	background:#f9f0bb;
+	border-color:#e0c52e;
+	}
+.disabled {
+	color:#666;
+	}
+.explanatory {
+	margin:10px 0;
+	padding:0 0 0 5px;
+	border-left:5px solid #CCC;
+	color:#666;
+	font-style:italic;
+	}
+.explanatory p, .explanatory ul, .explanatory ol {
+	margin-top:10px !important;
+	}
+.explanatory ol li {
+	list-style:decimal !important;
+	}
+.explanatory ul li {
+	list-style:disc;
+	}
+.explanatory ul {
+	padding-left:25px;
+	}
+.explanatory li {
+	margin:0 !important;
+	}
+
+/* --------------------------------------------------------------------- */
+/* USER LOCKING */
+/* --------------------------------------------------------------------- */
+
+#padlock {
+	margin:10px 10px 0 0;
+	float:left;
+	cursor:pointer;
+	width:40px;
+	height:40px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#cfd8e2 #c1cad3 #c1cad3 #cfd8e2;
+	-moz-border-radius:5px;
+  -webkit-border-radius:5px;
+	-webkit-box-shadow:0 1px 1px #FFF;
+	-moz-box-shadow:0 1px 1px #FFF;
+	text-shadow:1px 1px 1px #FFF;
+	background:#d7e2ee url("/images/interface/gradient.gif") 0 0 repeat-x;
+	}
+#padlock img {
+	display:block;
+	width:40px;
+	height:40px;
+	background-image:url("/images/icons/lock.png");
+	background-repeat:no-repeat;
+	}
+#padlock.locked img {
+	background-position:0 0;
+	}
+#padlock.unlocked img {
+	background-position:0 -40px;
+	}
+#reason_wrapper {
+	float:left;
+	}
+
+/* --------------------------------------------------------------------- */
+/* MISC */
+/* --------------------------------------------------------------------- */
+
+#filter input,#filter select {
+	width:auto;
+	}
+#summary li {
+	list-style:none;
+	}
+#status_count {
+	margin:10px 0 0 0;
+	}
+#status_count li {
+	list-style:none;
+	padding:0;
+	}
+.weight {
+	margin-top:20px;
+	padding-left:35px
+	}
+#show_inactive_checkbox {
+	width:auto;
+	margin:4px 5px 0 0;
+	font-size:10px;
+	}
+.excluded td {
+	color:#999;
+	}
+.locked {
+	font-style:italic;
+	text-decoration:line-through;
+	color:#999;
+	}
+.excluded td.no_line {
+	text-decoration:none;
+	}
+.locked .button_small {
+	font-style:normal;
+	}
+.non_interviewable {
+	color:#C00 !important;
+  }
+.pending {
+	font-style:italic;
+	color:#C00;
+	}
