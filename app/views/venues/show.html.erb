@@ -1,4 +1,4 @@
-<% form_for @venue, :html => { :method => :delete, :class => 'auxilliary ajaxed' } do |f| %>
+<% form_for @venue, :html => { :method => :delete, :class => 'auxiliary ajaxed' } do |f| %>
 <p><strong>Delete venue <%= @venue.name -%>?</strong></p>
   <% field_set_tag nil, :class => "button_wrapper" do %>
     <%= f.submit 'Delete', :class => "button" -%>

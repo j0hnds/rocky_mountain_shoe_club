@@ -1,4 +1,4 @@
-<% form_for @buyer, :html => { :method => :delete, :class => 'auxilliary ajaxed' } do |f| %>
+<% form_for @buyer, :html => { :method => :delete, :class => 'auxiliary ajaxed' } do |f| %>
 <p><strong>Delete buyer: <%= format_name(@buyer) -%>?</strong></p>
   <% field_set_tag nil, :class => 'button_wrapper' do %>
     <%= f.submit 'Delete', :class => 'button' -%>

@@ -42,7 +42,36 @@ $(function(){
         $(this).removeClass('even').addClass('odd')
     });
 
-    // Set up tooltips
+    // Add close button to auxiliary panels
+    $('.auxiliary').livequery(function(){
+            $('<img/>')
+                    .attr({
+                            src : '/images/clear.gif',
+                            title : 'close',
+                            alt : 'close',
+                            id : 'close_panel'
+                    })
+                    .addClass('closeButton')
+                    .css('display','none')
+                    .appendTo(this)
+                    .delay(1000)
+                    .pulse()
+                    .click(function(){
+                            $(this).fadeOut('fast',function(){
+                                    $(this).parent().fadeOut('fast',function(){
+                                            $(this).parent().css('display','none').empty();
+                                    });
+                            });
+                            if($('.message').size()){
+                                    $('#module_messages')
+                                            .fadeOut('fast',function(){
+                                                    $(this).empty();
+                                            });
+                            }
+                    });
+    });
+
+// Set up tooltips
     $('.tip').livequery(function(){
         if($(this).size()){
             // Load required resources
