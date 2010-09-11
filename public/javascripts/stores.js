@@ -20,4 +20,11 @@ $(function() {
           confirm_proceed_button : 'Yes, proceed'
       });
    });
+
+    $.require('/jquery/jquery.grid.js');
+
+
+    /* Setup scrolling tables */
+    $('.grid').grid({ height : 250 });
+
 });
