@@ -11,7 +11,7 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-@import url("custom-theme/jquery-ui-1.7.custom.css");
+@import url("reset-fonts-grids.css");
 @import url("base.css");
 @import url("forms.css");
 @import url("header_breadcrumbs.css");
@@ -21,3 +21,4 @@
 @import url("grid.css");
 @import url("tooltip.css");
 @import url("feedback.css");
+@import url("custom-theme/jquery-ui-1.7.custom.css");

@@ -1,14 +1,9 @@
-<% form_for @venue, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
-<ol>
-  <li><%= f.label :name %><%= f.text_field :name %></li>
-  <li><%= f.label :address_1 %><%= f.text_field :address_1 %></li>
-  <li><%= f.label :address_2 %><%= f.text_field :address_2 %></li>
-  <li><%= f.label :city %><%= f.text_field :city %></li>
-  <li><%= f.label :state %><%= f.select :state, state_postal_codes %></li>
-  <li><%= f.label :postal_code %><%= f.text_field :postal_code %></li>
-  <li><%= f.label :phone %><%= f.text_field :phone %></li>
-  <li><%= f.label :fax %><%= f.text_field :fax %></li>
-  <li><%= f.label :reservation %><%= f.text_field :reservation %></li>
-  <li><%= f.submit %></li>
-</ol>
-<% end %>
+<%= @venue_form.label :name %><%= @venue_form.text_field :name %>
+<%= @venue_form.label :address_1 %><%= @venue_form.text_field :address_1 %>
+<%= @venue_form.label :address_2 %><%= @venue_form.text_field :address_2 %>
+<%= @venue_form.label :city %><%= @venue_form.text_field :city %>
+<%= @venue_form.label :state %><%= @venue_form.select :state, state_postal_codes %>
+<%= @venue_form.label :postal_code %><%= @venue_form.text_field :postal_code %>
+<%= @venue_form.label :phone %><%= @venue_form.text_field :phone %>
+<%= @venue_form.label :fax %><%= @venue_form.text_field :fax %>
+<%= @venue_form.label :reservation %><%= @venue_form.text_field :reservation %>

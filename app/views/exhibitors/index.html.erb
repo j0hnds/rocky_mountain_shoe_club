@@ -1,21 +1,28 @@
 <% content_for :title do %>
 Exhibitors
 <% end %>
+<% content_for :breadcrumbs do %>
+<ul>
+  <li class="last"><span>Exhibitors</span></li>
+</ul>
+<% end %>
 <% content_for :bottom_load_js do %>
   <%= javascript_include_tag "exhibitors" %>
 <% end %>
-<div class="header">Exhibitors</div>
-<div>
-  <div class="button_wrapper">
-    <%= link_to 'Add Exhibitor', new_exhibitor_path, :class => 'button insert' %>
-  </div>
-  <% form_tag '/exhibitors/search', :id => 'search_form', :class => 'ajaxed' do %>
-    <% field_set_tag do %>
-      <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
-      <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+<!-- EXHIBITORS -->
+<div class="panel">
+  <div class="bar">
+    <div class="beta">
+      <%= link_to 'Add Exhibitor', new_exhibitor_path, :class => 'button insert' %>
+    </div>
+    <% form_tag '/exhibitors/search', :id => 'search_form', :class => 'gamma ajaxed' do %>
+      <% field_set_tag do %>
+        <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
+        <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
-<div id="exhibitors_list">
-  <%= render :partial => "exhibitors_list" %>
+  </div>
+  <div id="exhibitors_list">
+    <%= render :partial => "exhibitors_list" %>
+  </div>
 </div>

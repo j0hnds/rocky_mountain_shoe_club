@@ -1,6 +1,6 @@
 <% form_for @show, :html => { :method => :delete, :class => 'auxilliary ajaxed' } do |f| %>
-<ol>
-  <li>Delete show <%= @show.description -%></li>
-  <li><%= f.submit -%></li>
-</ol>
+<p><strong>Delete show <%= @show.description -%>?</strong></p>
+  <% field_set_tag nil, :class => "button_wrapper" do %>
+    <%= f.submit 'Delete', :class => "button" -%>
+  <% end %>
 <% end %>

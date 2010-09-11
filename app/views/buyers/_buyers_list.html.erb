@@ -1,24 +1,43 @@
-<table>
-  <thead>
-    <tr>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th>Name</th>
-      <th>Store</th>
-      <th>Phone</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @buyers.each do | buyer | %>
-    <tr id="buyer_<%= buyer.id -%>">
-      <td><%= link_to('Edit', edit_buyer_path(buyer), :class => 'button_small insert') -%></td>
-      <td><%= link_to('Delete', buyer_path(buyer), :class => 'button_small insert') -%></td>
-      <td><%= format_name(buyer) -%> </td>
-      <td><%= format_store(buyer.store) -%></td>
-      <td><%= buyer.phone -%></td>
-      <td><%= buyer.email -%></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- BUYERS LIST -->
+<div class="content">
+  <% if Buyer.count > 0 %>
+  <table summary="List of Buyers">
+      <col style="width:60px" />
+      <col style="width:60px" />
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>Store</th>
+        <th>Phone</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @buyers.each do | buyer | %>
+      <tr id="buyer_<%= buyer.id -%>">
+        <td><%= link_to('Edit', edit_buyer_path(buyer), :class => 'button_small insert') -%></td>
+        <td><%= link_to('Delete', buyer_path(buyer), :class => 'button_small insert') -%></td>
+        <td><%= format_name(buyer) -%> </td>
+        <td><%= format_store(buyer.store) -%></td>
+        <td><%= buyer.phone -%></td>
+        <td><%= buyer.email -%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
+    <div style="padding:0 10px 10px 10px">
+      <div class="message notice">
+        <ul>
+          <li>Click "Add Buyer" above to start adding new buyers.</li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>

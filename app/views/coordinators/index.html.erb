@@ -1,21 +1,28 @@
 <% content_for :title do %>
 Coordinators
 <% end %>
+<% content_for :breadcrumbs do %>
+<ul>
+  <li class="last"><span>Coordinators</span></li>
+</ul>
+<% end %>
 <% content_for :bottom_load_js do %>
   <%= javascript_include_tag "coordinators" %>
 <% end %>
-<div class="header">Coordinators</div>
-<div>
-  <div class="button_wrapper">
-    <%= link_to 'Add Coordinator', new_coordinator_path, :class => 'button insert' %>
-  </div>
-  <% form_tag '/coordinators/search', :id => 'search_form', :class => 'ajaxed' do %>
-    <% field_set_tag do %>
-      <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
-      <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+<!-- COORDINATORS -->
+<div class="panel">
+  <div class="bar">
+    <div class="beta">
+      <%= link_to 'Add Coordinator', new_coordinator_path, :class => 'button insert' %>
+    </div>
+    <% form_tag '/coordinators/search', :id => 'search_form', :class => 'gamma ajaxed' do %>
+      <% field_set_tag do %>
+        <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
+        <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
-<div id="coordinators_list">
-  <%= render :partial => "coordinators_list" %>
+  </div>
+  <div id="coordinators_list">
+    <%= render :partial => "coordinators_list" %>
+  </div>
 </div>

@@ -1,37 +1,9 @@
-<% form_for @store, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
-<% field_set_tag do %>
-  <%= f.label :name %><%= f.text_field :name %>
-  <li><%= f.label :address_1 %><%= f.text_field :address_1 %></li>
-  <li><%= f.label :address_2 %><%= f.text_field :address_2 %></li>
-  <li><%= f.label :city %><%= f.text_field :city %></li>
-  <li><%= f.label :state %><%= f.select :state, state_postal_codes %></li>
-  <li><%= f.label :postal_code %><%= f.text_field :postal_code %></li>
-  <li><%= f.label :email %><%= f.text_field :email %></li>
-  <li><%= f.label :phone %><%= f.text_field :phone %></li>
-  <li><%= f.label :fax %><%= f.text_field :fax %></li>
-  <li><%= f.submit %></li>
-</ol>
-<% end %>
-<% end %>
-<% unless @store.new_record? %>
-<hr/>
-<div>Store Buyers</div>
-  <% form_tag buyers_path, :id => 'add_buyer_form', :class => 'ajaxed' do %>
-    <% field_set_tag do %>
-    <%= hidden_field_tag 'form_location', 'store_add' -%>
-    <%= hidden_field_tag 'buyer[store_id]', @store.id -%>
-      <ol>
-	<li><%= label_tag 'buyer[first_name]' -%><%= text_field_tag 'buyer[first_name]' -%></li>
-	<li><%= label_tag 'buyer[last_name]' -%><%= text_field_tag 'buyer[last_name]' -%></li>
-	<li><%= label_tag 'buyer[phone]' -%><%= text_field_tag 'buyer[phone]' -%></li>
-	<li><%= label_tag 'buyer[email]' -%><%= text_field_tag 'buyer[email]' -%></li>
-	<li><%= submit_tag -%></li>
-    <% end %>
-  <% end %>
-
-  <hr/>
-
-<div id="store_buyers_list">
-  <%= render :partial => '/buyers/store_buyers_list' -%>  
-</div>
-<% end %>
+<%= @store_form.label :name %><%= @store_form.text_field :name %>
+<%= @store_form.label :address_1 %><%= @store_form.text_field :address_1 %>
+<%= @store_form.label :address_2 %><%= @store_form.text_field :address_2 %>
+<%= @store_form.label :city %><%= @store_form.text_field :city %>
+<%= @store_form.label :state %><%= @store_form.select :state, state_postal_codes %>
+<%= @store_form.label :postal_code %><%= @store_form.text_field :postal_code %>
+<%= @store_form.label :email %><%= @store_form.text_field :email %>
+<%= @store_form.label :phone %><%= @store_form.text_field :phone %>
+<%= @store_form.label :fax %><%= @store_form.text_field :fax %>

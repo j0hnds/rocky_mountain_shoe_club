@@ -1,2 +1,28 @@
-<!-- Do a form for creating store -->
-<%= render :partial => "form" %>
+<% form_for @store, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
+<%  @store_form = f %>
+<h2>Modify Store</h2>
+  <% field_set_tag do %>
+    <%= render :partial => "form" %>
+    <% field_set_tag nil, :class => "button_wrapper" do %>
+      <%= f.submit 'Save', :class => "button" %>
+    <% end %>
+  <% end %>
+<% end %>
+<hr/>
+<h2>Store Buyers</h2>
+  <% form_tag buyers_path, :id => 'add_buyer_form', :class => 'ajaxed' do %>
+    <% field_set_tag do %>
+    <%= hidden_field_tag 'form_location', 'store_add' -%>
+    <%= hidden_field_tag 'buyer[store_id]', @store.id -%>
+    <%= label_tag 'buyer[first_name]' -%><%= text_field_tag 'buyer[first_name]' -%>
+    <%= label_tag 'buyer[last_name]' -%><%= text_field_tag 'buyer[last_name]' -%>
+    <%= label_tag 'buyer[phone]' -%><%= text_field_tag 'buyer[phone]' -%>
+    <%= label_tag 'buyer[email]' -%><%= text_field_tag 'buyer[email]' -%>
+    <%= submit_tag -%>
+    <% end %>
+  <% end %>
+
+  <hr/>
+<div id="store_buyers_list">
+  <%= render :partial => '/buyers/store_buyers_list' -%>
+</div>

@@ -1,9 +1,4 @@
-<% form_for @coordinator, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
-<ol>
-  <li><%= f.label :first_name %><%= f.text_field :first_name %></li>
-  <li><%= f.label :last_name %><%= f.text_field :last_name %></li>
-  <li><%= f.label :phone %><%= f.text_field :phone %></li>
-  <li><%= f.label :email %><%= f.text_field :email %></li>
-  <li><%= f.submit %></li>
-</ol>
-<% end %>
+<%= @coordinator_form.label :first_name %><%= @coordinator_form.text_field :first_name %>
+<%= @coordinator_form.label :last_name %><%= @coordinator_form.text_field :last_name %>
+<%= @coordinator_form.label :phone %><%= @coordinator_form.text_field :phone %>
+<%= @coordinator_form.label :email %><%= @coordinator_form.text_field :email %>

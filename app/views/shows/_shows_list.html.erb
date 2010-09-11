@@ -1,30 +1,52 @@
-<table>
-  <thead>
-    <tr>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th>Description</th>
-      <th>Coordinator</th>
-      <th>Venue</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Next Start Date</th>
-      <th>Next End Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @shows.each do | show | %>
-    <tr id="show_<%= show.id -%>">
-      <td><%= link_to('Edit', edit_show_path(show), :class => 'button_small insert') -%></td>
-      <td><%= link_to('Delete', show_path(show), :class => 'button_small insert') -%></td>
-      <td><%= show.description -%></td>
-      <td><%= format_name(show.coordinator) -%></td>
-      <td><%= show.venue.name -%></td>
-      <td><%= format_date(show.start_date) -%></td>
-      <td><%= format_date(show.end_date) -%></td>
-      <td><%= format_date(show.next_start_date) -%></td>
-      <td><%= format_date(show.next_end_date) -%></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- SHOWS LIST -->
+<div class="content">
+  <% if Show.count > 0 %>
+    <table summary="List of Shows">
+      <col style="width:60px" />
+      <col style="width:60px" />
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>Description</th>
+          <th>Coordinator</th>
+          <th>Venue</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Next Start Date</th>
+          <th>Next End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shows.each do | show | %>
+        <tr id="show_<%= show.id -%>">
+          <td><%= link_to('Edit', edit_show_path(show), :class => 'button_small insert') -%></td>
+          <td><%= link_to('Delete', show_path(show), :class => 'button_small insert') -%></td>
+          <td><%= show.description -%></td>
+          <td><%= format_name(show.coordinator) -%></td>
+          <td><%= show.venue.name -%></td>
+          <td><%= format_date(show.start_date) -%></td>
+          <td><%= format_date(show.end_date) -%></td>
+          <td><%= format_date(show.next_start_date) -%></td>
+          <td><%= format_date(show.next_end_date) -%></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div style="padding:0 10px 10px 10px">
+      <div class="message notice">
+        <ul>
+          <li>Click "Add Show" above to start adding new shows.</li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>

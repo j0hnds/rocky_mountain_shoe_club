@@ -1,2 +1,11 @@
 <!-- Do a form for creating coordinators -->
-<%= render :partial => "form" %>
+<% form_for @coordinator, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
+  <% @coordinator_form = f %>
+<h2>Add Coordinator</h2>
+  <% field_set_tag do %>
+    <%= render :partial => "form" %>
+    <% field_set_tag nil, :class => "button_wrapper" do %>
+      <%= f.submit 'Save', :class => "button" %>
+    <% end %>
+  <% end %>
+<% end %>

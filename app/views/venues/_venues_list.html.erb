@@ -1,26 +1,46 @@
-<table>
-  <thead>
-    <tr>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Phone</th>
-      <th>Fax</th>
-      <th>Reservation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @venues.each do | venue | %>
-    <tr id="venue_<%= venue.id -%>">
-      <td><%= link_to('Edit', edit_venue_path(venue), :class => 'button_small insert') -%></td>
-      <td><%= link_to('Delete', venue_path(venue), :class => 'button_small insert') -%></td>
-      <td><%= venue.name -%></td>
-      <td><%= format_address(venue) -%></td>
-      <td><%= venue.phone -%></td>
-      <td><%= venue.fax -%></td>
-      <td><%= venue.reservation -%></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- VENUES LIST -->
+<div class="content">
+  <% if Venue.count > 0 %>
+  <table>
+      <col style="width:60px" />
+      <col style="width:60px" />
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Fax</th>
+        <th>Reservation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @venues.each do | venue | %>
+      <tr id="venue_<%= venue.id -%>">
+        <td><%= link_to('Edit', edit_venue_path(venue), :class => 'button_small insert') -%></td>
+        <td><%= link_to('Delete', venue_path(venue), :class => 'button_small insert') -%></td>
+        <td><%= venue.name -%></td>
+        <td><%= format_address(venue) -%></td>
+        <td><%= venue.phone -%></td>
+        <td><%= venue.fax -%></td>
+        <td><%= venue.reservation -%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
+    <div style="padding:0 10px 10px 10px">
+      <div class="message notice">
+        <ul>
+          <li>Click "Add Venue" above to start adding new venues.</li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>

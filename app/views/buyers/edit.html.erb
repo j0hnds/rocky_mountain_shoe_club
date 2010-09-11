@@ -1,1 +1,11 @@
-<%= render :partial => "form" %>
+<!-- Do a form for modifying buyers -->
+<% form_for @buyer, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do |f| %>
+  <% @buyer_form = f %>
+<h2>Modify Buyer</h2>
+  <% field_set_tag do %>
+    <%= render :partial => "form" %>
+    <% field_set_tag nil, :class => "button_wrapper" do %>
+      <%= f.submit 'Save', :class => "button" %>
+    <% end %>
+  <% end %>
+<% end %>

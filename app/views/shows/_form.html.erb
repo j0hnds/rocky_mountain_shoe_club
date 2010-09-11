@@ -1,11 +1,7 @@
-<h2>Show</h2>
-<% form_for @show, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
-  <%= f.label :description %><%= f.text_field :description %>
-  <%= f.label :coordinator_id %><%= f.select :coordinator_id, coordinator_options(@coordinators) %>
-  <%= f.label :venue_id %><%= f.select :venue_id, venue_options(@venues) %>
-  <%= f.label :start_date %><%= f.text_field :start_date, :class => 'date_picker', :readonly => 'readonly' %>
-  <%= f.label :end_date %><%= f.text_field :end_date, :class => 'date_picker', :readonly => 'readonly' %>
-  <%= f.label :next_start_date %><%= f.text_field :next_start_date, :class => 'date_picker', :readonly => 'readonly' %>
-  <%= f.label :next_end_date %><%= f.text_field :next_end_date, :class => 'date_picker', :readonly => 'readonly' %>
-  <%= f.submit %>
-<% end %>
+<%= @show_form.label :description %><%= @show_form.text_field :description %>
+<%= @show_form.label :coordinator_id %><%= @show_form.select :coordinator_id, coordinator_options(@coordinators) %>
+<%= @show_form.label :venue_id %><%= @show_form.select :venue_id, venue_options(@venues) %>
+<%= @show_form.label :start_date %><%= @show_form.text_field :start_date, :class => 'date_picker', :readonly => 'readonly' %>
+<%= @show_form.label :end_date %><%= @show_form.text_field :end_date, :class => 'date_picker', :readonly => 'readonly' %>
+<%= @show_form.label :next_start_date %><%= @show_form.text_field :next_start_date, :class => 'date_picker', :readonly => 'readonly' %>
+<%= @show_form.label :next_end_date %><%= @show_form.text_field :next_end_date, :class => 'date_picker', :readonly => 'readonly' %>

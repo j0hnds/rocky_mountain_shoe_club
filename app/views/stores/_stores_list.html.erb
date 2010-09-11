@@ -1,26 +1,46 @@
-<table>
-  <thead>
-    <tr>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Phone</th>
-      <th>Fax</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @stores.each do | store | %>
-    <tr id="store_<%= store.id -%>">
-      <td><%= link_to('Edit', edit_store_path(store), :class => 'button_small insert') -%></td>
-      <td><%= link_to('Delete', store_path(store), :class => 'button_small insert') -%></td>
-      <td><%= store.name -%> </td>
-      <td><%= format_address(store) -%></td>
-      <td><%= store.phone -%></td>
-      <td><%= store.fax -%></td>
-      <td><%= store.email -%></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- STORES LIST -->
+<div class="content">
+  <% if Store.count > 0 %>
+    <table>
+      <col style="width:60px" />
+      <col style="width:60px" />
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+      <col/>
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th>Fax</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @stores.each do | store | %>
+        <tr id="store_<%= store.id -%>">
+          <td><%= link_to('Edit', edit_store_path(store), :class => 'button_small insert') -%></td>
+          <td><%= link_to('Delete', store_path(store), :class => 'button_small insert') -%></td>
+          <td><%= store.name -%> </td>
+          <td><%= format_address(store) -%></td>
+          <td><%= store.phone -%></td>
+          <td><%= store.fax -%></td>
+          <td><%= store.email -%></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div style="padding:0 10px 10px 10px">
+      <div class="message notice">
+        <ul>
+          <li>Click "Add Store" above to start adding new stores.</li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>

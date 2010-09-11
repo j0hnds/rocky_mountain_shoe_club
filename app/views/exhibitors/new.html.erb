@@ -1,2 +1,10 @@
-<!-- Do a form for creating venue -->
-<%= render :partial => "form" %>
+<% form_for @exhibitor, :html => { :id => 'add_record', :class => 'auxilliary ajaxed' } do | f | %>
+  <% @exhibitor_form = f %>
+<h2>Add Exhibitor</h2>
+  <% field_set_tag do %>
+    <%= render :partial => "form" %>
+    <% field_set_tag nil, :class => "button_wrapper" do %>
+      <%= f.submit 'Save', :class => "button" %>
+    <% end %>
+  <% end %>
+<% end %>
