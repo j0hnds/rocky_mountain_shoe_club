@@ -1,0 +1,3 @@
+class ExhibitorRegistrationsController < ApplicationController
+
+end
