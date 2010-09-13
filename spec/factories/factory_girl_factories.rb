@@ -63,3 +63,8 @@ Factory.define :buyer do |f|
   f.phone '101-111-1111'
   f.email "#{first_name}.#{last_name}@mail.com"
 end
+
+# Pass in a show and an exhibitor
+Factory.define :exhibitor_registration do |f|
+  f.room '12'
+end

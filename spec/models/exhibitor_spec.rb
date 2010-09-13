@@ -24,7 +24,7 @@ describe Exhibitor do
   end
 
   it "should ensure that all required fields have been specified" do
-    @exhibitor.valid? # .should be false
+    @exhibitor.valid?.should be false
     @exhibitor.errors.count.should be 6
     @exhibitor.errors[:first_name].blank?.should_not be true
     @exhibitor.errors[:last_name].blank?.should_not be true
