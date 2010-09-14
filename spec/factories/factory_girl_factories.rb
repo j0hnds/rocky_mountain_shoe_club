@@ -68,3 +68,10 @@ end
 Factory.define :exhibitor_registration do |f|
   f.room '12'
 end
+
+# Pass in an exhibitor_registration
+Factory.define :exhibitor_associate do |f|
+  f.first_name Factory.next :name
+  f.last_name Factory.next :name
+  f.room '101'
+end
