@@ -12,7 +12,7 @@
       <li><%= link_to 'Venues', venues_path, :title => "Manage Venues", :class => "tip#{menu_item_selected('venues')}" -%></li>
       <li><%= link_to 'Exhibitors', exhibitors_path, :title => "Manage Exhibitors", :class => "tip#{menu_item_selected('exhibitors')}" -%></li>
       <li><%= link_to 'Stores', stores_path, :title => "Manage Stores", :class => "tip#{menu_item_selected('stores')}" -%></li>
-      <li><%= link_to 'Buyers', buyers_path, :title => "Manage Buyers", :class => "tip#{menu_item_selected('buyers')}" -%></li>
+      <li><%= link_to 'Buyers', store_buyers_path(0), :title => "Manage Buyers", :class => "tip#{menu_item_selected('buyers')}" -%></li>
     </ul>
 
   </div>
