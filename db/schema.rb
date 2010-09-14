@@ -9,12 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100914175146) do
+ActiveRecord::Schema.define(:version => 20100914193859) do
 
   create_table "associate_lines", :force => true do |t|
     t.integer  "exhibitor_associate_id",               :null => false
     t.string   "line",                   :limit => 40, :null => false
     t.integer  "priority",                             :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "buyer_registrations", :force => true do |t|
+    t.integer  "show_id",    :null => false
+    t.integer  "buyer_id",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

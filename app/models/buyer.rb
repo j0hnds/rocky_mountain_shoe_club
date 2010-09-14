@@ -2,6 +2,8 @@ class Buyer < ActiveRecord::Base
   include ValidationConstants
 
   belongs_to :store
+  has_many :buyer_registrations
+  has_many :shows, :through => :buyer_registrations
 
   validates_presence_of :store_id, :first_name, :last_name
   validates_format_of :phone, :with => PHONE_REGEX, :allow_blank => true
