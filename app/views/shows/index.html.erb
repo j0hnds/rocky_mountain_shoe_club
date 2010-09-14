@@ -15,7 +15,7 @@ Shows
     <div class="beta">
       <%= link_to 'Add Show', new_show_path, :class => 'button insert' %>
     </div>
-    <% form_tag '/shows/search', :id => 'search_form', :class => 'gamma ajaxed' do %>
+    <% form_tag search_shows_path, :id => 'search_form', :class => 'gamma ajaxed' do %>
       <% field_set_tag do %>
         <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
         <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>

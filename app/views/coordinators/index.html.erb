@@ -15,7 +15,7 @@ Coordinators
     <div class="beta">
       <%= link_to 'Add Coordinator', new_coordinator_path, :class => 'button insert' %>
     </div>
-    <% form_tag '/coordinators/search', :id => 'search_form', :class => 'gamma ajaxed' do %>
+    <% form_tag search_coordinators_path, :id => 'search_form', :class => 'gamma ajaxed' do %>
       <% field_set_tag do %>
         <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
         <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>

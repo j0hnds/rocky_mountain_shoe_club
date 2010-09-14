@@ -13,14 +13,18 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products
 
   map.resource :dashboard, :controller => 'dashboard'
-  map.resources :venues
-  map.resources :coordinators
-  map.resources :shows
-  map.resources :exhibitors
-  map.resources :stores
-  map.resources :buyers
+  map.resources :venues, :collection => { :search => :get }
+  map.resources :coordinators, :collection => { :search => :get }
+  map.resources :shows, :collection => { :search => :get }
+  map.resources :exhibitors, :collection => { :search => :get }
+  map.resources :stores, :collection => { :search => :get } do | stores |
+    stores.resources :buyers, :collection => { :search => :get }
+  end
   map.resources :exhibitor_registrations do |registrations|
     registrations.resources :exhibitor_lines
+    registrations.resources :exhibitor_associates do | associates |
+      associates.resources :associates_lines
+    end
   end
 
   # Sample resource route with options:
