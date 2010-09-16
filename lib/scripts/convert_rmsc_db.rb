@@ -1,85 +1,9 @@
 #!/usr/bin/env /home/djs/Projects/rocky_mountain_shoe_club/script/runner
 #
 require 'postgres'
+require 'postgres_connection'
 require 'show_dates'
 include ShowDates
-
-Host = 'localhost'
-Port = 5432
-DB_name = 'RMSC'
-User = 'dms'
-Password = 'j0rdan32'
-
-class PostgresConnection
-
-  def connection
-    @connection ||= PGconn.connect(Host, Port, '', '', DB_name, User, Password)
-  end
-
-  def exec(sql)
-    connection.exec sql
-  end
-
-  def close
-    @connection.close if @connection
-    @connection = nil
-  end
-
-end
-
-class ConversionData
-
-  attr_reader :show_mappings, :exhibitor_mappings, :associate_mappings, :store_mappings, :buyer_mappings
-  attr_accessor :latest_show_id, :coordinator_id, :venue_id
-
-  def initialize
-    @show_mappings = {}
-    @exhibitor_mappings = {}
-    @associate_mappings = {}
-    @store_mappings = {}
-    @buyer_mappings = {}
-  end
-
-  def add_show_mapping(pg_id, my_id)
-    @latest_show_id ||= pg_id # Set the latest show on the conversion data
-    @show_mappings[pg_id] = my_id
-  end
-
-  def add_exhibitor_mapping(pg_id, my_id)
-    @exhibitor_mappings[pg_id] = my_id
-  end
-
-  def add_associate_mapping(pg_id, my_id)
-    @associate_mappings[pg_id] = my_id
-  end
-
-  def add_store_mapping(pg_id, my_id)
-    @store_mappings[pg_id] = my_id
-  end
-
-  def add_buyer_mapping(pg_id, my_id)
-    @buyer_mappings[pg_id] = my_id
-  end
-
-end
-
-def clear_mysql_database(v1)
-  puts "Clearing the database"
-#  AssociateLine.delete_all
-#  AssociateRoom.delete_all
-#  Associate.delete_all
-#  BuyerAttendance.delete_all
-#  Buyer.delete_all
-  ExhibitorRegistration.delete_all
-  ExhibitorLine.delete_all
-#  ExhibitorRoom.delete_all
-  Exhibitor.delete_all
-#  Store.delete_all
-  Show.delete_all
-  Coordinator.delete_all
-  Venue.delete_all
-  puts "Done clearing the database"
-end
 
 def load_show(conversion, row)
   show = Show.new
@@ -478,7 +402,7 @@ conversion = ConversionData.new
 pgconn = PostgresConnection.new
 
 # Clear out the mysql database
-clear_mysql_database('param')
+pgconn.clear_mysql_database
 
 # Bring in all the shows from the Postgres db
 load_shows conversion, pgconn
