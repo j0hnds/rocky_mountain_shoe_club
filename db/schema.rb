@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 20100914193859) do
 
   create_table "associate_lines", :force => true do |t|
     t.integer  "exhibitor_associate_id",               :null => false
-    t.string   "line",                   :limit => 80, :null => false
+    t.string   "line",                   :limit => 40, :null => false
     t.integer  "priority",                             :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20100914193859) do
 
   create_table "exhibitor_lines", :force => true do |t|
     t.integer  "exhibitor_registration_id",               :null => false
-    t.string   "line",                      :limit => 80, :null => false
+    t.string   "line",                      :limit => 40, :null => false
     t.integer  "priority",                                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"

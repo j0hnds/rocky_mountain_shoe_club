@@ -32,7 +32,7 @@ describe AssociateLine do
 
   it "should ensure that the lengths of all the fields are valid" do
     @associate_line.exhibitor_associate_id = @exhibitor_associate.id
-    @associate_line.line = '01234567890123456789012345678901234567890'
+    @associate_line.line = '012345678901234567890123456789012345678901234567890123456789012345678901234567890'
     @associate_line.priority = 1
 
     @associate_line.valid?.should be false

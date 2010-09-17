@@ -30,7 +30,7 @@ describe ExhibitorLine do
 
   it "should ensure that the lengths of all the fields are valid" do
     @exhibitor_line.exhibitor_registration_id = @exhibitor_registration.id
-    @exhibitor_line.line = '01234567890123456789012345678901234567890'
+    @exhibitor_line.line = '012345678901234567890123456789012345678901234567890123456789012345678901234567890'
     @exhibitor_line.priority = 1
 
     @exhibitor_line.valid?.should be false
