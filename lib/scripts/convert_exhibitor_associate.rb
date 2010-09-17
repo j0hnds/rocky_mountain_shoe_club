@@ -18,7 +18,7 @@ WHERE
 	AA.SHOW_ID = #{@conversion_data.latest_show_id}
 	AND A.ASSOCIATE_ID = AA.ASSOCIATE_ID
 EOF
-    res = conn.exec sql
+    res = @pgconn.exec sql
 
     associates = res.collect do | row |
       load_associate row

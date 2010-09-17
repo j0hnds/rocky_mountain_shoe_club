@@ -24,16 +24,14 @@ class PostgresConnection
 
   def clear_mysql_database
     puts "Clearing the database"
-#  AssociateLine.delete_all
-#  AssociateRoom.delete_all
-#  Associate.delete_all
-#  BuyerAttendance.delete_all
-#  Buyer.delete_all
+    BuyerRegistration.delete_all
+    ExhibitorAssociateLine.delete_all
+    ExhibitorAssociate.delete_all
+    Buyer.delete_all
     ExhibitorRegistration.delete_all
     ExhibitorLine.delete_all
-#  ExhibitorRoom.delete_all
     Exhibitor.delete_all
-#  Store.delete_all
+    Store.delete_all
     Show.delete_all
     Coordinator.delete_all
     Venue.delete_all
