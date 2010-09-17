@@ -102,5 +102,49 @@ describe Store do
     @store.errors.count.should be 1
     @store.errors[:email].blank?.should be false
   end
+
+  it "the search_for named scope should allow case independent searching by name" do
+    stores = []
+    stores << Factory.create(:store, :name => 'Big Store')
+    stores << Factory.create(:store, :name => 'Little Store')
+
+    search_results = Store.search_for('lit')
+    search_results.should_not be nil
+    search_results.size.should be 1
+    search_results[0].name == 'Listtle Store'
+  end
+
+  it "the search_for named scope should return the full list when empty" do
+    stores = []
+    stores << Factory.create(:store, :name => 'Big Store')
+    stores << Factory.create(:store, :name => 'Little Store')
+
+    search_results = Store.search_for('')
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the search_for named scope should return the full list when nil" do
+    stores = []
+    stores << Factory.create(:store, :name => 'Big Store')
+    stores << Factory.create(:store, :name => 'Little Store')
+
+    search_results = Store.search_for(nil)
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the ordered named scope should return the buyers ordered by last name first, then first name" do
+    stores = []
+    stores << Factory.create(:store, :name => 'Big Store')
+    stores << Factory.create(:store, :name => 'Little Store')
+
+    ordered_stores = Store.ordered
+    ordered_stores.should_not be nil
+    ordered_stores.size.should == stores.size
+    ordered_stores[0].name.should == 'Big Store'
+    ordered_stores[1].name.should == 'Little Store'
+  end
+
 end
 

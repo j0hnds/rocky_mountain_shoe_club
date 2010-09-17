@@ -6,6 +6,8 @@ require 'spec_helper'
 describe Show do
   before(:each) do
     @show = Show.new
+    @coordinator = Factory.create(:coordinator)
+    @venue = Factory.create(:venue)
   end
 
   it "accept all valid field values" do
@@ -55,6 +57,51 @@ describe Show do
     @show.next_start_date.should == Date.parse('2011-03-05')
     @show.next_end_date.should == Date.parse('2011-03-06')
   end
-  
+
+  it "the search_for named scope should allow case independent searching by description" do
+    shows = []
+    shows << Factory.create(:show, :description => 'Big Show', :coordinator => @coordinator, :venue => @venue)
+    shows << Factory.create(:show, :description => 'Little Show', :coordinator => @coordinator, :venue => @venue)
+
+    search_results = Show.search_for('big')
+    search_results.should_not be nil
+    search_results.size.should be 1
+    search_results[0].description == 'Big Show'
+  end
+
+  it "the search_for named scope should return the full list when empty" do
+    shows = []
+    shows << Factory.create(:show, :description => 'Big Show', :coordinator => @coordinator, :venue => @venue)
+    shows << Factory.create(:show, :description => 'Little Show', :coordinator => @coordinator, :venue => @venue)
+
+    search_results = Show.search_for('')
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the search_for named scope should return the full list when nil" do
+    shows = []
+    shows << Factory.create(:show, :description => 'Big Show', :coordinator => @coordinator, :venue => @venue)
+    shows << Factory.create(:show, :description => 'Little Show', :coordinator => @coordinator, :venue => @venue)
+
+    search_results = Show.search_for(nil)
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the ordered named scope should return the buyers ordered by start date descending" do
+    shows = []
+    shows << Factory.create(:show, :description => 'Last Show', :start_date => Date.today - 365.days, :coordinator => @coordinator, :venue => @venue)
+    shows << Factory.create(:show, :description => 'First Show', :start_date => Date.today, :coordinator => @coordinator, :venue => @venue)
+    shows << Factory.create(:show, :description => 'Middle Show', :start_date => Date.today - 180.days, :coordinator => @coordinator, :venue => @venue)
+
+    ordered_shows = Show.ordered
+    ordered_shows.should_not be nil
+    ordered_shows.size.should == shows.size
+    ordered_shows[0].description.should == 'First Show'
+    ordered_shows[1].description.should == 'Middle Show'
+    ordered_shows[2].description.should == 'Last Show'
+  end
+
 end
 

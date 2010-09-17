@@ -93,5 +93,62 @@ describe Exhibitor do
     @exhibitor.errors.count.should be 1
     @exhibitor.errors[:email].blank?.should_not be true
   end
+
+  it "the search_for named scope should allow case independent searching by first name" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Exhibitor.search_for('jer')
+    search_results.should_not be nil
+    search_results.size.should be 1
+    search_results[0].first_name == 'Jerry'
+  end
+
+  it "the search_for named scope should allow case independent searching by last name" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Exhibitor.search_for('smi')
+    search_results.should_not be nil
+    search_results.size.should be 1
+    search_results[0].first_name == 'Henry'
+  end
+
+  it "the search_for named scope should return the full list when empty" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Exhibitor.search_for('')
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the search_for named scope should return the full list when nil" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Exhibitor.search_for(nil)
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the ordered named scope should return the buyers ordered by last name first, then first name" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Isaac', :last_name => 'Jones')
+
+    ordered_exhibitors = Exhibitor.ordered
+    ordered_exhibitors.should_not be nil
+    ordered_exhibitors.size.should == exhibitors.size
+    ordered_exhibitors[0].first_name.should == 'Isaac'
+    ordered_exhibitors[1].first_name.should == 'Jerry'
+    ordered_exhibitors[2].first_name.should == 'Henry'
+  end
+
 end
 

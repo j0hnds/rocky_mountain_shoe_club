@@ -12,7 +12,7 @@ class Show < ActiveRecord::Base
   validates_length_of :description, :maximum => 40, :allow_blank => true
 
   named_scope :search_for, lambda { | search_term | { :conditions => [ "UPPER(description) like ?", "#{search_term}%" ] } unless search_term.blank? }
-  named_scope :ordered, :order => "start_date ASC, description ASC"
+  named_scope :ordered, :order => "start_date DESC, description ASC"
 
   def set_default_dates(from_date=Date.today)
     self.start_date = next_show_date(from_date)

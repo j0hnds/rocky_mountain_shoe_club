@@ -61,5 +61,61 @@ describe Buyer do
     @buyer.errors[:email].blank?.should_not be true
   end
 
+  it "the search_for named scope should allow case independent searching by first name" do
+    buyers = []
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Jerry', :last_name => 'Jones')
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Buyer.search_for('jer')
+    search_results.should_not be nil
+    search_results.size.should be 1
+    search_results[0].first_name == 'Jerry'
+  end
+
+  it "the search_for named scope should allow case independent searching by last name" do
+    buyers = []
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Jerry', :last_name => 'Jones')
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Buyer.search_for('smi')
+    search_results.should_not be nil
+    search_results.size.should be 1
+    search_results[0].first_name == 'Henry'
+  end
+
+  it "the search_for named scope should return the full list when empty" do
+    buyers = []
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Jerry', :last_name => 'Jones')
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Buyer.search_for('')
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the search_for named scope should return the full list when nil" do
+    buyers = []
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Jerry', :last_name => 'Jones')
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Henry', :last_name => 'Smith')
+
+    search_results = Buyer.search_for(nil)
+    search_results.should_not be nil
+    search_results.size.should be 2
+  end
+
+  it "the ordered named scope should return the buyers ordered by last name first, then first name" do
+    buyers = []
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Jerry', :last_name => 'Jones')
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Henry', :last_name => 'Smith')
+    buyers << Factory.create(:buyer, :store => @store, :first_name => 'Isaac', :last_name => 'Jones')
+
+    ordered_buyers = Buyer.ordered
+    ordered_buyers.should_not be nil
+    ordered_buyers.size.should == buyers.size
+    ordered_buyers[0].first_name.should == 'Isaac'
+    ordered_buyers[1].first_name.should == 'Jerry'
+    ordered_buyers[2].first_name.should == 'Henry'
+  end
+
 end
 
