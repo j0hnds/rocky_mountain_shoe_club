@@ -1,9 +1,9 @@
 class ConvertAssociateLines < ConvertTable
 
-  def convert
-    # Query the PG DB for the set of lines for the associates that have been
-    # loaded.
-    sql = <<EOF
+  private
+
+  def conversion_sql
+    <<EOF
 SELECT
 	*
 FROM
@@ -12,20 +12,9 @@ WHERE
 	ATTENDEE_TYPE = 2
 	AND SHOW_ID = #{@conversion_data.latest_show_id}
 EOF
-    res = @pgconn.exec sql
-
-    lines = res.collect do | row |
-      load_associate_line row
-    end
-
-    res.clear
-
-    lines.size
   end
 
-  private
-
-  def load_associate_line(row)
+  def convert_record(row)
     ass_line = AssociateLine.new
 
     ass_line.exhibitor_associate_id = @conversion_data.associate_mappings[row[2]]

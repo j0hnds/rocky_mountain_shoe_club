@@ -2,22 +2,14 @@
 # and open the template in the editor.
 
 class ConvertExhibitorLines < ConvertTable
-  def convert
-    # Query the PG DB for the set of exhibitor lines
-    res = @pgconn.exec "SELECT * FROM ATTENDEE_LINE WHERE ATTENDEE_TYPE = 1"
-
-    exhibitor_lines = res.collect do | row |
-      load_exhibitor_line row
-    end
-
-    res.clear
-
-    exhibitor_lines.size
-  end
 
   private
 
-  def load_exhibitor_line(row)
+  def conversion_sql
+    "SELECT * FROM ATTENDEE_LINE WHERE ATTENDEE_TYPE = 1"
+  end
+
+  def convert_record(row)
     er = @conversion_data.get_exhibitor_registration(row[3], row[2])
 
     ex_line = ExhibitorLine.new

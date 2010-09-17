@@ -2,22 +2,14 @@
 # and open the template in the editor.
 
 class ConvertExhibitorAttendance < ConvertTable
-  def convert
-    # Query the PG DB for the set of exhibitor attendance data
-    res = @pgconn.exec "SELECT * FROM EXHIBITOR_ATTENDANCE"
-
-    exhibitor_attendance = res.collect do | row |
-      load_exhibitor_attendance row
-    end
-
-    res.clear
-
-    exhibitor_attendance.size
-  end
 
   private
 
-  def load_exhibitor_attendance(row)
+  def conversion_sql
+    "SELECT * FROM EXHIBITOR_ATTENDANCE"
+  end
+
+  def convert_record(row)
     exhibitor_attendance = ExhibitorRegistration.new
 
     exhibitor_attendance.show_id = @conversion_data.show_mappings[row[0]]

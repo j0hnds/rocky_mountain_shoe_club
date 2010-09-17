@@ -1,8 +1,9 @@
 class ConvertStore < ConvertTable
 
-  def convert
-    # Query the PG DB for the set of stores
-    sql = <<EOF
+  private
+
+  def conversion_sql
+    <<EOF
 SELECT
 	C.CHAIN_ID,
 	C.NAME,
@@ -20,21 +21,9 @@ FROM
 WHERE
 	S.CHAIN_ID = C.CHAIN_ID
 EOF
-
-    res = @pgconn.exec sql
-
-    stores = res.collect do | row |
-      load_store row
-    end
-
-    res.clear
-
-    stores.size
   end
 
-  private
-
-  def load_store(row)
+  def convert_record(row)
     store = Store.new
 
     store.name = row[1]

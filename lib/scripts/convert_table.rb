@@ -7,11 +7,22 @@ class ConvertTable
 
   def convert_data
     puts "Converting #{get_description}..."
-    count = convert
+    count = process_records
     puts "Converted #{count} records."
   end
 
   private
+
+  def process_records
+    # Process the SQL provided by the derived class.
+    res = @pgconn.exec(conversion_sql)
+
+    records = res.collect { | row | convert_record(row) }
+
+    res.clear
+
+    records.size
+  end
 
   def get_description
     self.class.name.tableize.split(/_/).slice(1..-1).join(' ')

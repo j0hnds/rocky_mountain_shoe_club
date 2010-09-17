@@ -3,22 +3,13 @@ require 'show_dates'
 class ConvertShow < ConvertTable
   include ShowDates
 
-  def convert
-    # Query the PG DB for the set of shows
-    res = @pgconn.exec "SELECT * FROM SHOW ORDER BY START_DATE DESC"
-
-    shows = res.collect do | row |
-      load_show row
-    end
-
-    res.clear
-
-    shows.size
-  end
-
   private
 
-  def load_show(row)
+  def conversion_sql
+    "SELECT * FROM SHOW ORDER BY START_DATE DESC"
+  end
+
+  def convert_record(row)
     show = Show.new
 
     unless @conversion_data.coordinator_id

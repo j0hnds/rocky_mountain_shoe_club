@@ -1,9 +1,9 @@
 class ConvertExhibitorAssociate < ConvertTable
 
-  def convert
-    # Query the PG DB for the set of associates for exhibitors that have
-    # associates attending the latest show
-    sql = <<EOF
+  private
+
+  def conversion_sql
+    <<EOF
 SELECT
 	AA.SHOW_ID,
 	AA.ASSOCIATE_ID AS AA_ASSOCIATE_ID,
@@ -18,20 +18,9 @@ WHERE
 	AA.SHOW_ID = #{@conversion_data.latest_show_id}
 	AND A.ASSOCIATE_ID = AA.ASSOCIATE_ID
 EOF
-    res = @pgconn.exec sql
-
-    associates = res.collect do | row |
-      load_associate row
-    end
-
-    res.clear
-
-    associates.size
   end
 
-  private
-
-  def load_associate(row)
+  def convert_record(row)
     er = @conversion_data.get_exhibitor_registration(row[0], row[3])
 
     ex_ass = ExhibitorAssociate.new

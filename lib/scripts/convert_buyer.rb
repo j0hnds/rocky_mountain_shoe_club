@@ -1,22 +1,12 @@
 class ConvertBuyer < ConvertTable
 
-  def convert
-    sql = "SELECT * FROM BUYER"
-
-    res = @pgconn.exec sql
-
-    buyers = res.collect do | row |
-      load_buyer row
-    end
-
-    res.clear
-
-    buyers.size
-  end
-
   private
 
-  def load_buyer(row)
+  def conversion_sql
+    "SELECT * FROM BUYER"
+  end
+
+  def convert_record(row)
     buyer = Buyer.new
 
     buyer.store_id = @conversion_data.store_mappings[row[1]]
