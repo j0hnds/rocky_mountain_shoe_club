@@ -32,7 +32,6 @@ class ConvertShow < ConvertTable
     show.end_date = row[3]
     show.next_start_date = next_show_date(show.end_date)
     show.next_end_date = show.next_start_date + 1.day
-    # show.next_show = row[13]
     if !@conversion_data.coordinator_id
       coordinator.first_name, coordinator.last_name = row[9].split(/ /)
       coordinator.phone = row[14]

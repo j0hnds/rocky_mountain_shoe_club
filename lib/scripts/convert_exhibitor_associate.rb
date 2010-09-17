@@ -36,8 +36,6 @@ EOF
 
     ex_ass = ExhibitorAssociate.new
 
-    # ex_ass.exhibitor_id = @conversion_data.exhibitor_mappings[row[3]]
-    # ex_ass.show_id = @conversion_data.show_mappings[row[0]]
     ex_ass.exhibitor_registration_id = er.id
     ex_ass.first_name = row[4]
     ex_ass.last_name = row[5]

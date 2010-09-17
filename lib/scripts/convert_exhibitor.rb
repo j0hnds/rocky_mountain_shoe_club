@@ -31,7 +31,6 @@ class ConvertExhibitor < ConvertTable
     exhibitor.fax = row[8]
     exhibitor.cell = row[9]
     exhibitor.email = row[10]
-    #  puts "[#{exhibitor.email}]"
     #
     # The following takes care of the bad data that exists in the PG DB
     #

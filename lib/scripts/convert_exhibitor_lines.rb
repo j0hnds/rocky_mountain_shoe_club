@@ -22,8 +22,6 @@ class ConvertExhibitorLines < ConvertTable
 
     ex_line = ExhibitorLine.new
 
-  #  ex_line.show_id = conversion.show_mappings[row[3]]
-  #  ex_line.exhibitor_id = conversion.exhibitor_mappings[row[2]]
     ex_line.exhibitor_registration_id = er.id
     ex_line.line = row[4]
     ex_line.priority = row[5]
