@@ -1,137 +1,12 @@
 #!/usr/bin/env /home/djs/Projects/rocky_mountain_shoe_club/script/runner
 #
-require 'postgres'
-require 'postgres_connection'
-require 'show_dates'
-include ShowDates
-
-def load_show(conversion, row)
-  show = Show.new
-
-  unless conversion.coordinator_id
-    coordinator = Coordinator.new
-    venue = Venue.new
-  end
-  
-  pg_id = row[0]
-  show.description = row[1]
-  show.start_date = row[2]
-  show.end_date = row[3]
-  show.next_start_date = next_show_date(show.end_date)
-  show.next_end_date = show.next_start_date + 1.day
-  # show.next_show = row[13]
-  if !conversion.coordinator_id
-    coordinator.first_name, coordinator.last_name = row[9].split(/ /)
-    coordinator.phone = row[14]
-    coordinator.email = row[15]
-    venue.name = row[4]
-    venue.phone = row[10]
-    venue.fax = row[11]
-    venue.reservation = row[12]
-    venue.address_1 = row[16]
-    venue.city = row[17]
-    venue.state = row[18]
-    venue.postal_code = row[19]
-
-    coordinator.save!
-    venue.save!
-    conversion.coordinator_id = coordinator.id
-    conversion.venue_id = venue.id
-
-    show.venue = venue
-    show.coordinator = coordinator
-  else
-    show.coordinator_id = conversion.coordinator_id
-    show.venue_id = conversion.venue_id
-  end
-  
-  # Try to save the show
-  show.save!
-
-  # Add the mapping to the conversion
-  conversion.add_show_mapping(pg_id, show.id)
-  
-  show
-end
-
-def load_exhibitor(conversion, row)
-  exhibitor = Exhibitor.new
-
-  pg_id = row[0]
-  exhibitor.first_name = row[1]
-  exhibitor.address_1 = row[2]
-  exhibitor.address_2 = row[3]
-  exhibitor.city = row[4]
-  exhibitor.state = row[5]
-  exhibitor.postal_code = row[6]
-  exhibitor.phone = row[7]
-  exhibitor.fax = row[8]
-  exhibitor.cell = row[9]
-  exhibitor.email = row[10]
-#  puts "[#{exhibitor.email}]"
-  #
-  # The following takes care of the bad data that exists in the PG DB
-  #
-  exhibitor.email = "edana@skechers.com" if exhibitor.email == 'edana@skechers'
-  exhibitor.email = "cconrardye@aerosoles.com" if exhibitor.email == 'cconrardyeaerosoles.com'
-  exhibitor.email = "todd.home@consolidated_shoe.com" if exhibitor.email == 'todd.home@consolidated shoe.com'
-  exhibitor.email = "wendy.collins@consolidated_shoe.com" if exhibitor.email == 'wendy.collins@consolidated shoe.com'
-  #
-  # End of data cleanup section
-  #
-  exhibitor.last_name = row[11]
-
-  # Try to save the exhibitor
-  exhibitor.save!
-
-  # Add the mapping to the conversion
-  conversion.add_exhibitor_mapping(pg_id, exhibitor.id)
-
-  exhibitor
-end
-
-def load_exhibitor_line(conversion, row)
-  er = ExhibitorRegistration.find_by_show_id_and_exhibitor_id(conversion.show_mappings[row[3]], conversion.exhibitor_mappings[row[2]])
-  puts "#{conversion.show_mappings[row[3]]} - #{conversion.exhibitor_mappings[row[2]]}"
-
-
-  ex_line = ExhibitorLine.new
-
-#  ex_line.show_id = conversion.show_mappings[row[3]]
-#  ex_line.exhibitor_id = conversion.exhibitor_mappings[row[2]]
-  ex_line.exhibitor_registration_id = er.id
-  ex_line.line = row[4]
-  ex_line.priority = row[5]
-
-  # Try to save the exhibitor line
-  ex_line.save!
-
-  ex_line
-end
-
-def load_exhibitor_attendance(conversion, row)
-  exhibitor_attendance = ExhibitorRegistration.new
-#  room_assignment = RoomAssignment.new
-
-  exhibitor_attendance.show_id = conversion.show_mappings[row[0]]
-  exhibitor_attendance.exhibitor_id = conversion.exhibitor_mappings[row[1]]
-#  room_assignment.show_id = conversion.show_mappings[row[0]]
-#  room_assignment.exhibitor_id = conversion.exhibitor_mappings[row[1]]
-
-#  exhibitor_room = ExhibitorRoom.new
-#  exhibitor_room.exhibitor_attendance
-#  exhibitor_room.room = row[2]
-#  room_assignment.room = row[2]
-  exhibitor_attendance.room = row[2]
-
-  # Try to save the room assignment
-  exhibitor_attendance.save!
-#  exhibitor_room.save!
-#  room_assignment.save!
-
-  exhibitor_attendance
-#  room_assignment
-end
+require RAILS_ROOT + '/lib/scripts/postgres_conn'
+require RAILS_ROOT + '/lib/scripts/conversion_data'
+require RAILS_ROOT + '/lib/scripts/convert_table'
+require RAILS_ROOT + '/lib/scripts/convert_show'
+require RAILS_ROOT + '/lib/scripts/convert_exhibitor'
+require RAILS_ROOT + '/lib/scripts/convert_exhibitor_attendance'
+require RAILS_ROOT + '/lib/scripts/convert_exhibitor_lines'
 
 #def load_associate(conversion, row)
 #  ex_ass = ExhibitorAssociate.new
@@ -213,65 +88,8 @@ end
 #  ba
 #end
 
-def load_shows(conversion, conn)
-  puts "Loading the shows..."
-
-  # Query the PG DB for the set of shows
-  res = conn.exec "SELECT * FROM SHOW ORDER BY START_DATE DESC"
-
-  shows = res.collect do | row |
-    load_show conversion, row
-  end
-
-  res.clear
-
-  puts "#{shows.size} shows loaded."
-end
-
-def load_exhibitors(conversion, conn)
-  puts "Loading the exhibitors"
-
-  # Query the PG DB for the set of exhibitors
-  res = conn.exec "SELECT * FROM EXHIBITOR"
-
-  exhibitors = res.collect do | row |
-    load_exhibitor conversion, row
-  end
-
-  res.clear
-
-  puts "#{exhibitors.size} exhibitors loaded."
-end
-
-def load_exhibitor_lines(conversion, conn)
-  puts "Loading the exhibitor lines"
-
-  # Query the PG DB for the set of exhibitor lines
-  res = conn.exec "SELECT * FROM ATTENDEE_LINE WHERE ATTENDEE_TYPE = 1"
-
-  exhibitor_lines = res.collect do | row |
-    load_exhibitor_line conversion, row
-  end
-
-  res.clear
-
-  puts "#{exhibitor_lines.size} exhibitor lines"
-end
-
-def load_exhibitor_attendance_records(conversion, conn)
-  puts "Loading the exhibitor attendance"
-
-  # Query the PG DB for the set of exhibitor attendance data
-  res = conn.exec "SELECT * FROM EXHIBITOR_ATTENDANCE"
-
-  exhibitor_attendance = res.collect do | row |
-    load_exhibitor_attendance conversion, row
-  end
-
-  res.clear
-
-  puts "#{exhibitor_attendance.size} exhibitor attendance records"
-end
+#
+#
 
 #def load_exhibitor_associates(conversion, conn)
 #  puts "Loading the exhibitor associates"
@@ -405,13 +223,19 @@ pgconn = PostgresConnection.new
 pgconn.clear_mysql_database
 
 # Bring in all the shows from the Postgres db
-load_shows conversion, pgconn
+cs = ConvertShow.new(pgconn, conversion)
+cs.convert
+# load_shows conversion, pgconn
 
 # Bring in all the exhibitors from the Postgres db
-load_exhibitors conversion, pgconn
+ce = ConvertExhibitor.new(pgconn, conversion)
+ce.convert
+#load_exhibitors conversion, pgconn
 
 # Load all the exhibitor attendance information
-load_exhibitor_attendance_records conversion, pgconn
+cea = ConvertExhibitorAttendance.new(pgconn, conversion)
+cea.convert
+#load_exhibitor_attendance_records conversion, pgconn
 
 # Load all the exhibitor associates
 # load_exhibitor_associates conversion, pgconn
@@ -426,7 +250,9 @@ load_exhibitor_attendance_records conversion, pgconn
 # load_buyer_attendances conversion, pgconn
 
 # Load all the exhibitor line information
-load_exhibitor_lines conversion, pgconn
+cel = ConvertExhibitorLines.new(pgconn, conversion)
+cel.convert
+#load_exhibitor_lines conversion, pgconn
 
 # Load all the associate lines
 # load_associate_lines conversion, pgconn

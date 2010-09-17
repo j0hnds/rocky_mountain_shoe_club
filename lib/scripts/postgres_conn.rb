@@ -1,3 +1,6 @@
+require 'postgres'
+#require 'postgres_connection'
+
 HOST = 'localhost'
 PORT = 5432
 DB_NAME = 'RMSC'

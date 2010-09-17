@@ -1,0 +1,41 @@
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+
+class ConvertExhibitorLines < ConvertTable
+  def convert
+    puts "Loading the exhibitor lines"
+
+    # Query the PG DB for the set of exhibitor lines
+    res = @pgconn.exec "SELECT * FROM ATTENDEE_LINE WHERE ATTENDEE_TYPE = 1"
+
+    exhibitor_lines = res.collect do | row |
+      load_exhibitor_line row
+    end
+
+    res.clear
+
+    puts "#{exhibitor_lines.size} exhibitor lines"
+  end
+
+  private
+
+  def load_exhibitor_line(row)
+    er = ExhibitorRegistration.find_by_show_id_and_exhibitor_id(@conversion_data.show_mappings[row[3]], @conversion_data.exhibitor_mappings[row[2]])
+    puts "#{@conversion_data.show_mappings[row[3]]} - #{@conversion_data.exhibitor_mappings[row[2]]} :: #{row[3]} - #{row[2]}"
+
+
+    ex_line = ExhibitorLine.new
+
+  #  ex_line.show_id = conversion.show_mappings[row[3]]
+  #  ex_line.exhibitor_id = conversion.exhibitor_mappings[row[2]]
+    ex_line.exhibitor_registration_id = er.id
+    ex_line.line = row[4]
+    ex_line.priority = row[5]
+
+    # Try to save the exhibitor line
+    ex_line.save!
+
+    ex_line
+  end
+  
+end
