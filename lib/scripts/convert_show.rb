@@ -4,8 +4,6 @@ class ConvertShow < ConvertTable
   include ShowDates
 
   def convert
-    puts "Loading the shows..."
-
     # Query the PG DB for the set of shows
     res = @pgconn.exec "SELECT * FROM SHOW ORDER BY START_DATE DESC"
 
@@ -15,7 +13,7 @@ class ConvertShow < ConvertTable
 
     res.clear
 
-    puts "#{shows.size} shows loaded."
+    shows.size
   end
 
   private

@@ -1,8 +1,6 @@
 class ConvertAssociateLines < ConvertTable
 
   def convert
-    puts "Loading the associate lines"
-
     # Query the PG DB for the set of lines for the associates that have been
     # loaded.
     sql = <<EOF
@@ -22,7 +20,7 @@ EOF
 
     res.clear
 
-    puts "#{lines.size} associate lines loaded"
+    lines.size
   end
 
   private

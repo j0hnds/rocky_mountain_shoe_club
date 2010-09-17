@@ -1,8 +1,6 @@
 class ConvertExhibitorAssociate < ConvertTable
 
   def convert
-    puts "Loading the exhibitor associates"
-
     # Query the PG DB for the set of associates for exhibitors that have
     # associates attending the latest show
     sql = <<EOF
@@ -28,7 +26,7 @@ EOF
 
     res.clear
 
-    puts "#{associates.size} associate records"
+    associates.size
   end
 
   private

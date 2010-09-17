@@ -3,8 +3,6 @@
 
 class ConvertExhibitorLines < ConvertTable
   def convert
-    puts "Loading the exhibitor lines"
-
     # Query the PG DB for the set of exhibitor lines
     res = @pgconn.exec "SELECT * FROM ATTENDEE_LINE WHERE ATTENDEE_TYPE = 1"
 
@@ -14,7 +12,7 @@ class ConvertExhibitorLines < ConvertTable
 
     res.clear
 
-    puts "#{exhibitor_lines.size} exhibitor lines"
+    exhibitor_lines.size
   end
 
   private

@@ -1,8 +1,6 @@
 class ConvertStore < ConvertTable
 
   def convert
-    puts "Loading the stores"
-
     # Query the PG DB for the set of stores
     sql = <<EOF
 SELECT
@@ -31,7 +29,7 @@ EOF
 
     res.clear
 
-    puts "#{stores.size} stores loaded"
+    stores.size
   end
 
   private

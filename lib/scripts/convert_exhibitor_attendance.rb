@@ -3,8 +3,6 @@
 
 class ConvertExhibitorAttendance < ConvertTable
   def convert
-    puts "Loading the exhibitor attendance"
-
     # Query the PG DB for the set of exhibitor attendance data
     res = @pgconn.exec "SELECT * FROM EXHIBITOR_ATTENDANCE"
 
@@ -14,7 +12,7 @@ class ConvertExhibitorAttendance < ConvertTable
 
     res.clear
 
-    puts "#{exhibitor_attendance.size} exhibitor attendance records"
+    exhibitor_attendance.size
   end
 
   private

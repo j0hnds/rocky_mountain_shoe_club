@@ -1,8 +1,6 @@
 class ConvertBuyer < ConvertTable
 
   def convert
-    puts "Loading the buyers"
-
     sql = "SELECT * FROM BUYER"
 
     res = @pgconn.exec sql
@@ -13,7 +11,7 @@ class ConvertBuyer < ConvertTable
 
     res.clear
 
-    puts "#{buyers.size} buyers loaded"
+    buyers.size
   end
 
   private

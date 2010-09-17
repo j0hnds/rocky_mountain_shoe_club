@@ -3,8 +3,6 @@
 
 class ConvertExhibitor < ConvertTable
   def convert
-    puts "Loading the exhibitors"
-
     # Query the PG DB for the set of exhibitors
     res = @pgconn.exec "SELECT * FROM EXHIBITOR"
 
@@ -14,7 +12,7 @@ class ConvertExhibitor < ConvertTable
 
     res.clear
 
-    puts "#{exhibitors.size} exhibitors loaded."
+    exhibitors.size
   end
 
   private
