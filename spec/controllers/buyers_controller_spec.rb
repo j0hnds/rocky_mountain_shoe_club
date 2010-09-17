@@ -19,6 +19,68 @@ describe BuyersController do
     response.should render_template(:index)
   end
 
+  it "should return all the buyers when no search term is specified" do
+    buyers = []
+    buyers << Factory.create(:buyer, { :store => @store })
+    buyers << Factory.create(:buyer, { :store => @store })
+
+    post :search , { :search => ''}
+    assigns[:buyers].should_not be nil
+    assigns[:buyers].size.should == buyers.size
+    response.should render_template(:success)
+  end
+
+  it "should return the correct buyer when a search term is specified" do
+    buyers = []
+    buyers << Factory.create(:buyer, { :first_name => 'Henry', :last_name => 'Smith', :store => @store })
+    buyers << Factory.create(:buyer, { :first_name => 'Jerry', :last_name => 'Jones', :store => @store })
+
+    post :search , { :search => 'hen'}
+    assigns[:buyers].should_not be nil
+    assigns[:buyers].size.should == 1
+    assigns[:buyers][0].first_name.should == 'Henry'
+    response.should render_template(:success)
+  end
+
+  it "should return no buyers when a bogus search term is specified" do
+    buyers = []
+    buyers << Factory.create(:buyer, { :first_name => 'Henry', :last_name => 'Smith', :store => @store })
+    buyers << Factory.create(:buyer, { :first_name => 'Jerry', :last_name => 'Jones', :store => @store })
+
+    post :search , { :search => 'hair'}
+    assigns[:buyers].should_not be nil
+    assigns[:buyers].size.should == 0
+    response.should render_template(:success)
+  end
+
+  it "when a search term has been specified, it should remain in session until cleared" do
+    buyers = []
+    buyers << Factory.create(:buyer, { :first_name => 'Henry', :last_name => 'Smith', :store => @store })
+    buyers << Factory.create(:buyer, { :first_name => 'Jerry', :last_name => 'Jones', :store => @store })
+
+    post :search , { :search => 'jon'}
+    assigns[:buyers].should_not be nil
+    assigns[:buyers].size.should == 1
+    assigns[:buyers][0].first_name.should == 'Jerry'
+    response.should render_template(:success)
+
+    # Now, re-view the buyers index page; the search term should still be in
+    # effect
+    get :index
+    assigns[:buyers].should_not be nil
+    assigns[:buyers].size.should == 1
+    assigns[:buyers][0].first_name.should == 'Jerry'
+    response.should render_template(:index)
+
+    # Clear the search term
+    post :search , { :search => ''}
+
+    get :index
+    assigns[:buyers].should_not be nil
+    assigns[:buyers].size.should == buyers.size
+    response.should render_template(:index)
+  end
+
   it "returns a new buyer for the new action" do
     get :new
     buyer = assigns[:buyer]
@@ -46,6 +108,10 @@ describe BuyersController do
     buyer.phone.should == '202-222-2222'
     buyer.email.should == 'jim.storch@mail.com'
     buyer.store_id.should be @store.id
+
+    buyers = assigns[:buyers]
+    buyers.should_not be nil
+    buyers.size.should == 1
 
     response.should render_template(:success)
   end
@@ -111,6 +177,10 @@ describe BuyersController do
     buyer.phone.should == '303-333-3333'
     buyer.email.should == 'jim.storch@mail.com'
     buyer.store_id.should == @store.id
+
+    buyers = assigns[:buyers]
+    buyers.should_not be nil
+    buyers.size.should == 1
 
     response.should render_template(:success)
   end

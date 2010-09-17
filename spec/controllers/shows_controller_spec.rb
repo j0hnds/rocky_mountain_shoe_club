@@ -23,6 +23,77 @@ describe ShowsController do
     response.should render_template(:index)
   end
 
+  it "should return all the shows when no search term is specified" do
+    # Create two shows
+    coordinator = Factory.create(:coordinator)
+    venue = Factory.create(:venue)
+    shows = []
+    shows << Factory.create(:show, { :coordinator => coordinator, :venue => venue })
+    shows << Factory.create(:show, { :coordinator => coordinator, :venue => venue })
+
+    post :search , { :search => ''}
+    assigns[:shows].should_not be nil
+    assigns[:shows].size.should == shows.size
+    response.should render_template(:success)
+  end
+
+  it "should return the correct show when a search term is specified" do
+    coordinator = Factory.create(:coordinator)
+    venue = Factory.create(:venue)
+    shows = []
+    shows << Factory.create(:show, { :description => 'Big Show', :coordinator => coordinator, :venue => venue })
+    shows << Factory.create(:show, { :description => 'Little Show', :coordinator => coordinator, :venue => venue })
+
+    post :search , { :search => 'big'}
+    assigns[:shows].should_not be nil
+    assigns[:shows].size.should == 1
+    assigns[:shows][0].description.should == 'Big Show'
+    response.should render_template(:success)
+  end
+
+  it "should return no shows when a bogus search term is specified" do
+    coordinator = Factory.create(:coordinator)
+    venue = Factory.create(:venue)
+    shows = []
+    shows << Factory.create(:show, { :description => 'Big Show', :coordinator => coordinator, :venue => venue })
+    shows << Factory.create(:show, { :description => 'Little Show', :coordinator => coordinator, :venue => venue })
+
+    post :search , { :search => 'hair'}
+    assigns[:shows].should_not be nil
+    assigns[:shows].size.should == 0
+    response.should render_template(:success)
+  end
+
+  it "when a search term has been specified, it should remain in session until cleared" do
+    coordinator = Factory.create(:coordinator)
+    venue = Factory.create(:venue)
+    shows = []
+    shows << Factory.create(:show, { :description => 'Big Show', :coordinator => coordinator, :venue => venue })
+    shows << Factory.create(:show, { :description => 'Little Show', :coordinator => coordinator, :venue => venue })
+
+    post :search , { :search => 'big'}
+    assigns[:shows].should_not be nil
+    assigns[:shows].size.should == 1
+    assigns[:shows][0].description.should == 'Big Show'
+    response.should render_template(:success)
+
+    # Now, re-view the shows index page; the search term should still be in
+    # effect
+    get :index
+    assigns[:shows].should_not be nil
+    assigns[:shows].size.should == 1
+    assigns[:shows][0].description.should == 'Big Show'
+    response.should render_template(:index)
+
+    # Clear the search term
+    post :search , { :search => ''}
+
+    get :index
+    assigns[:shows].should_not be nil
+    assigns[:shows].size.should == shows.size
+    response.should render_template(:index)
+  end
+
   it "returns a new show for the new action" do
     2.times { Factory.create(:venue) }
     3.times { Factory.create(:coordinator) }
@@ -78,6 +149,10 @@ describe ShowsController do
     show.end_date.should == Date.parse('2010-09-02')
     show.next_start_date.should == Date.parse('2011-03-05')
     show.next_end_date.should == Date.parse('2011-03-06')
+
+    shows = assigns[:shows]
+    shows.should_not be nil
+    shows.size.should == 1
 
     response.should render_template(:success)
   end
@@ -167,6 +242,10 @@ describe ShowsController do
     show.end_date.should == Date.parse('2010-01-02')
     show.next_start_date.should == Date.parse('2010-01-03')
     show.next_end_date.should == Date.parse('2010-01-04')
+
+    shows = assigns[:shows]
+    shows.should_not be nil
+    shows.size.should == 1
 
     response.should render_template(:success)
   end

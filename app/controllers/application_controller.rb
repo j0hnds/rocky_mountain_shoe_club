@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def error_on_create_messages(model_instance, name=nil)
     obj_name = (name) ? name : model_instance.class.human_name
     error_stickie("<strong>Could not create a new #{obj_name} because of the following problems:</strong>")
-    model_instance.errors.each_full{|full_msg| error_stickie("#{full_msg}")}
+    model_instance.errors.each_full { | full_msg | error_stickie("#{full_msg}") }
   end
 
   def must_have_current_show

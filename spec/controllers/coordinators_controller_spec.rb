@@ -20,6 +20,68 @@ describe CoordinatorsController do
     response.should render_template(:index)
   end
 
+  it "should return all the coordinators when no search term is specified" do
+    coordinators = []
+    coordinators << Factory.create(:coordinator)
+    coordinators << Factory.create(:coordinator)
+
+    post :search , { :search => ''}
+    assigns[:coordinators].should_not be nil
+    assigns[:coordinators].size.should == coordinators.size
+    response.should render_template(:success)
+  end
+
+  it "should return the correct coordinator when a search term is specified" do
+    coordinators = []
+    coordinators << Factory.create(:coordinator, :first_name => 'Jerry', :last_name => 'Jones')
+    coordinators << Factory.create(:coordinator, :first_name => 'Henry', :last_name => 'Smith')
+
+    post :search , { :search => 'jone'}
+    assigns[:coordinators].should_not be nil
+    assigns[:coordinators].size.should == 1
+    assigns[:coordinators][0].first_name.should == 'Jerry'
+    response.should render_template(:success)
+  end
+
+  it "should return no coordinators when a bogus search term is specified" do
+    coordinators = []
+    coordinators << Factory.create(:coordinator, :first_name => 'Jerry', :last_name => 'Jones')
+    coordinators << Factory.create(:coordinator, :first_name => 'Henry', :last_name => 'Smith')
+
+    post :search , { :search => 'hair'}
+    assigns[:coordinators].should_not be nil
+    assigns[:coordinators].size.should == 0
+    response.should render_template(:success)
+  end
+
+  it "when a search term has been specified, it should remain in session until cleared" do
+    coordinators = []
+    coordinators << Factory.create(:coordinator, :first_name => 'Jerry', :last_name => 'Jones')
+    coordinators << Factory.create(:coordinator, :first_name => 'Henry', :last_name => 'Smith')
+
+    post :search , { :search => 'hen'}
+    assigns[:coordinators].should_not be nil
+    assigns[:coordinators].size.should == 1
+    assigns[:coordinators][0].first_name.should == 'Henry'
+    response.should render_template(:success)
+
+    # Now, re-view the venues index page; the search term should still be in
+    # effect
+    get :index
+    assigns[:coordinators].should_not be nil
+    assigns[:coordinators].size.should == 1
+    assigns[:coordinators][0].first_name.should == 'Henry'
+    response.should render_template(:index)
+
+    # Clear the search term
+    post :search , { :search => ''}
+
+    get :index
+    assigns[:coordinators].should_not be nil
+    assigns[:coordinators].size.should == coordinators.size
+    response.should render_template(:index)
+  end
+
   it "returns a new coordinator for the new action" do
     get :new
     coordinator = assigns[:coordinator]
@@ -40,6 +102,10 @@ describe CoordinatorsController do
     coordinator.last_name.should == 'jones'
     coordinator.phone.should == '303-333-3333'
     coordinator.email.should == 'jim.jones@mail.com'
+
+    coordinators = assigns[:coordinators]
+    coordinators.should_not be nil
+    coordinators.size.should == 1
 
     response.should render_template(:success)
   end
@@ -95,6 +161,10 @@ describe CoordinatorsController do
     coordinator.last_name.should == 'jones'
     coordinator.phone.should == '999-999-9999'
     coordinator.email.should == 'jim.jones@mail.com'
+
+    coordinators = assigns[:coordinators]
+    coordinators.should_not be nil
+    coordinators.size.should == 1
 
     response.should render_template(:success)
   end

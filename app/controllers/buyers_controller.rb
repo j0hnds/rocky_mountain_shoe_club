@@ -11,8 +11,8 @@ class BuyersController < ApplicationController
   # This will be called via Ajax to replace the buyer list with the
   # filtered list.
   def search
-    @buyers = show_list
-    render :action => success
+    @buyers = buyer_list
+    render :action => :success
   end
 
   def new

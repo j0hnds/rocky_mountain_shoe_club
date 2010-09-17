@@ -20,6 +20,68 @@ describe ExhibitorsController do
     response.should render_template(:index)
   end
 
+  it "should return all the exhibitors when no search term is specified" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor)
+    exhibitors << Factory.create(:exhibitor)
+
+    post :search , { :search => ''}
+    assigns[:exhibitors].should_not be nil
+    assigns[:exhibitors].size.should == exhibitors.size
+    response.should render_template(:success)
+  end
+
+  it "should return the correct exhibitor when a search term is specified" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+
+    post :search , { :search => 'Henry'}
+    assigns[:exhibitors].should_not be nil
+    assigns[:exhibitors].size.should == 1
+    assigns[:exhibitors][0].first_name.should == 'Henry'
+    response.should render_template(:success)
+  end
+
+  it "should return no exhibitors when a bogus search term is specified" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+
+    post :search , { :search => 'hair'}
+    assigns[:exhibitors].should_not be nil
+    assigns[:exhibitors].size.should == 0
+    response.should render_template(:success)
+  end
+
+  it "when a search term has been specified, it should remain in session until cleared" do
+    exhibitors = []
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Henry', :last_name => 'Smith')
+    exhibitors << Factory.create(:exhibitor, :first_name => 'Jerry', :last_name => 'Jones')
+
+    post :search , { :search => 'jone'}
+    assigns[:exhibitors].should_not be nil
+    assigns[:exhibitors].size.should == 1
+    assigns[:exhibitors][0].first_name.should == 'Jerry'
+    response.should render_template(:success)
+
+    # Now, re-view the venues index page; the search term should still be in
+    # effect
+    get :index
+    assigns[:exhibitors].should_not be nil
+    assigns[:exhibitors].size.should == 1
+    assigns[:exhibitors][0].first_name.should == 'Jerry'
+    response.should render_template(:index)
+
+    # Clear the search term
+    post :search , { :search => ''}
+
+    get :index
+    assigns[:exhibitors].should_not be nil
+    assigns[:exhibitors].size.should == exhibitors.size
+    response.should render_template(:index)
+  end
+
   it "returns a new exhibitor for the new action" do
     get :new
     exhibitor = assigns[:exhibitor]
@@ -46,6 +108,10 @@ describe ExhibitorsController do
     exhibitor.city.should == 'Grenoble'
     exhibitor.state.should == 'GA'
     exhibitor.postal_code.should == '90999'
+
+    exhibitors = assigns[:exhibitors]
+    exhibitors.should_not be nil
+    exhibitors.size.should == 1
 
     response.should render_template(:success)
   end
@@ -111,6 +177,10 @@ describe ExhibitorsController do
     exhibitor.last_name.should == 'jones'
     exhibitor.phone.should == '999-999-9999'
     exhibitor.email.should == 'jim.jones@mail.com'
+
+    exhibitors = assigns[:exhibitors]
+    exhibitors.should_not be nil
+    exhibitors.size.should == 1
 
     response.should render_template(:success)
   end

@@ -13,12 +13,12 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products
 
   map.resource :dashboard, :controller => 'dashboard'
-  map.resources :venues, :collection => { :search => :get }
-  map.resources :coordinators, :collection => { :search => :get }
-  map.resources :shows, :collection => { :search => :get }
-  map.resources :exhibitors, :collection => { :search => :get }
-  map.resources :stores, :collection => { :search => :get } do | stores |
-    stores.resources :buyers, :collection => { :search => :get }
+  map.resources :venues, :collection => { :search => :post }
+  map.resources :coordinators, :collection => { :search => :post }
+  map.resources :shows, :collection => { :search => :post }
+  map.resources :exhibitors, :collection => { :search => :post }
+  map.resources :stores, :collection => { :search => :post } do | stores |
+    stores.resources :buyers, :collection => { :search => :post }
   end
   map.resources :exhibitor_registrations do |registrations|
     registrations.resources :exhibitor_lines

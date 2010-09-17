@@ -20,6 +20,68 @@ describe VenuesController do
     response.should render_template(:index)
   end
 
+  it "should return all the venues when no search term is specified" do
+    venues = []
+    venues << Factory.create(:venue)
+    venues << Factory.create(:venue)
+
+    post :search , { :search => ''}
+    assigns[:venues].should_not be nil
+    assigns[:venues].size.should == venues.size
+    response.should render_template(:success)
+  end
+
+  it "should return the correct venue when a search term is specified" do
+    venues = []
+    venues << Factory.create(:venue, :name => 'Big Hotel')
+    venues << Factory.create(:venue, :name => 'Little Hotel')
+
+    post :search , { :search => 'big'}
+    assigns[:venues].should_not be nil
+    assigns[:venues].size.should == 1
+    assigns[:venues][0].name.should == 'Big Hotel'
+    response.should render_template(:success)
+  end
+
+  it "should return no venues when a bogus search term is specified" do
+    venues = []
+    venues << Factory.create(:venue, :name => 'Big Hotel')
+    venues << Factory.create(:venue, :name => 'Little Hotel')
+
+    post :search , { :search => 'hair'}
+    assigns[:venues].should_not be nil
+    assigns[:venues].size.should == 0
+    response.should render_template(:success)
+  end
+
+  it "when a search term has been specified, it should remain in session until cleared" do
+    venues = []
+    venues << Factory.create(:venue, :name => 'Big Hotel')
+    venues << Factory.create(:venue, :name => 'Little Hotel')
+
+    post :search , { :search => 'big'}
+    assigns[:venues].should_not be nil
+    assigns[:venues].size.should == 1
+    assigns[:venues][0].name.should == 'Big Hotel'
+    response.should render_template(:success)
+
+    # Now, re-view the venues index page; the search term should still be in
+    # effect
+    get :index
+    assigns[:venues].should_not be nil
+    assigns[:venues].size.should == 1
+    assigns[:venues][0].name.should == 'Big Hotel'
+    response.should render_template(:index)
+
+    # Clear the search term
+    post :search , { :search => ''}
+
+    get :index
+    assigns[:venues].should_not be nil
+    assigns[:venues].size.should == venues.size
+    response.should render_template(:index)
+  end
+
   it "returns a new venue for the new action" do
     get :new
     venue = assigns[:venue]
@@ -52,6 +114,10 @@ describe VenuesController do
     venue.phone.should == '303-333-3333'
     venue.fax.should == '202-222-2222'
     venue.reservation.should == '888-888-8888'
+
+    venues = assigns[:venues]
+    venues.should_not be nil
+    venues.size.should == 1
 
     response.should render_template(:success)
   end
@@ -135,6 +201,10 @@ describe VenuesController do
     venue.phone.should == '999-999-9999'
     venue.fax.should == '123-123-1234'
     venue.reservation.should == '321-321-3210'
+
+    venues = assigns[:venues]
+    venues.should_not be nil
+    venues.size.should == 1
 
     response.should render_template(:success)
   end

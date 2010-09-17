@@ -20,6 +20,68 @@ describe StoresController do
     response.should render_template(:index)
   end
 
+  it "should return all the stores when no search term is specified" do
+    stores = []
+    stores << Factory.create(:store)
+    stores << Factory.create(:store)
+
+    post :search , { :search => ''}
+    assigns[:stores].should_not be nil
+    assigns[:stores].size.should == stores.size
+    response.should render_template(:success)
+  end
+
+  it "should return the correct store when a search term is specified" do
+    stores = []
+    stores << Factory.create(:store, :name => 'Big Store')
+    stores << Factory.create(:store, :name => 'Little Store')
+
+    post :search , { :search => 'big'}
+    assigns[:stores].should_not be nil
+    assigns[:stores].size.should == 1
+    assigns[:stores][0].name.should == 'Big Store'
+    response.should render_template(:success)
+  end
+
+  it "should return no stores when a bogus search term is specified" do
+    stores = []
+    stores << Factory.create(:store, :name => 'Big Store')
+    stores << Factory.create(:store, :name => 'Little Store')
+
+    post :search , { :search => 'hair'}
+    assigns[:stores].should_not be nil
+    assigns[:stores].size.should == 0
+    response.should render_template(:success)
+  end
+
+  it "when a search term has been specified, it should remain in session until cleared" do
+    stores = []
+    stores << Factory.create(:store, :name => 'Big Store')
+    stores << Factory.create(:store, :name => 'Little Store')
+
+    post :search , { :search => 'big'}
+    assigns[:stores].should_not be nil
+    assigns[:stores].size.should == 1
+    assigns[:stores][0].name.should == 'Big Store'
+    response.should render_template(:success)
+
+    # Now, re-view the venues index page; the search term should still be in
+    # effect
+    get :index
+    assigns[:stores].should_not be nil
+    assigns[:stores].size.should == 1
+    assigns[:stores][0].name.should == 'Big Store'
+    response.should render_template(:index)
+
+    # Clear the search term
+    post :search , { :search => ''}
+
+    get :index
+    assigns[:stores].should_not be nil
+    assigns[:stores].size.should == stores.size
+    response.should render_template(:index)
+  end
+
   it "returns a new store for the new action" do
     get :new
     store = assigns[:store]
@@ -46,6 +108,10 @@ describe StoresController do
     store.postal_code == '80111'
     store.phone.should == '303-333-3333'
     store.email.should == 'jim.jones@mail.com'
+
+    stores = assigns[:stores]
+    stores.should_not be nil
+    stores.size.should == 1
 
     response.should render_template(:success)
   end
@@ -106,6 +172,10 @@ describe StoresController do
     store.city.should == 'Township'
     store.state.should == 'AL'
     store.postal_code.should == '99900'
+
+    stores = assigns[:stores]
+    stores.should_not be nil
+    stores.size.should == 1
 
     response.should render_template(:success)
   end
