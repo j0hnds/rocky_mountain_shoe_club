@@ -32,10 +32,8 @@ class ConvertExhibitor < ConvertTable
     #
     exhibitor.last_name = row[11]
 
-    # Try to save the exhibitor
     exhibitor.save!
 
-    # Add the mapping to the conversion
     @conversion_data.add_exhibitor_mapping(pg_id, exhibitor.id)
 
     exhibitor

@@ -48,14 +48,11 @@ class ConvertShow < ConvertTable
       show.venue_id = @conversion_data.venue_id
     end
 
-    # Try to save the show
     show.save!
 
-    # Add the mapping to the conversion
     @conversion_data.add_show_mapping(pg_id, show.id)
 
     show
   end
-
 
 end

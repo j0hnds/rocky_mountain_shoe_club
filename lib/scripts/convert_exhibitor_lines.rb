@@ -18,7 +18,6 @@ class ConvertExhibitorLines < ConvertTable
     ex_line.line = row[4]
     ex_line.priority = row[5]
 
-    # Try to save the exhibitor line
     ex_line.save!
 
     ex_line

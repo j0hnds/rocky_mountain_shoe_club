@@ -16,7 +16,6 @@ class ConvertExhibitorAttendance < ConvertTable
     exhibitor_attendance.exhibitor_id = @conversion_data.exhibitor_mappings[row[1]]
     exhibitor_attendance.room = row[2]
 
-    # Try to save the room assignment
     exhibitor_attendance.save!
 
     exhibitor_attendance
