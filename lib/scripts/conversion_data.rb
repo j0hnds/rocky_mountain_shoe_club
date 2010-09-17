@@ -36,5 +36,11 @@ class ConversionData
     @buyer_mappings[pg_id] = my_id
   end
 
+  def get_exhibitor_registration(pg_show_id, pg_exhibitor_id)
+    show_id = @show_mappings[pg_show_id]
+    exhibitor_id = @show_mappings[pg_exhibitor_id]
+    ExhibitorRegistration.find_by_show_id_and_exhibitor_id(show_id, exhibitor_id)
+  end
+
 end
 

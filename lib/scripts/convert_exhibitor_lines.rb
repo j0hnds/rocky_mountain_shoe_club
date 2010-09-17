@@ -20,9 +20,7 @@ class ConvertExhibitorLines < ConvertTable
   private
 
   def load_exhibitor_line(row)
-    er = ExhibitorRegistration.find_by_show_id_and_exhibitor_id(@conversion_data.show_mappings[row[3]], @conversion_data.exhibitor_mappings[row[2]])
-    puts "#{@conversion_data.show_mappings[row[3]]} - #{@conversion_data.exhibitor_mappings[row[2]]} :: #{row[3]} - #{row[2]}"
-
+    er = @conversion_data.get_exhibitor_registration(row[3], row[2])
 
     ex_line = ExhibitorLine.new
 
