@@ -13,6 +13,17 @@ require RAILS_ROOT + '/lib/scripts/convert_buyer'
 require RAILS_ROOT + '/lib/scripts/convert_buyer_attendance'
 require RAILS_ROOT + '/lib/scripts/convert_associate_lines'
 
+CONVERSIONS = [ ConvertShow,
+                ConvertExhibitor,
+                ConvertExhibitorAttendance,
+                ConvertExhibitorAssociate,
+                ConvertStore,
+                ConvertBuyer,
+                ConvertBuyerAttendance,
+                ConvertExhibitorLines,
+                ConvertAssociateLines
+              ]
+
 # Create the conversion collector
 conversion = ConversionData.new
 
@@ -22,50 +33,11 @@ pgconn = PostgresConnection.new
 # Clear out the mysql database
 pgconn.clear_mysql_database
 
-# Bring in all the shows from the Postgres db
-cs = ConvertShow.new(pgconn, conversion)
-cs.convert_data
-# load_shows conversion, pgconn
-
-# Bring in all the exhibitors from the Postgres db
-ce = ConvertExhibitor.new(pgconn, conversion)
-ce.convert_data
-#load_exhibitors conversion, pgconn
-
-# Load all the exhibitor attendance information
-cea = ConvertExhibitorAttendance.new(pgconn, conversion)
-cea.convert_data
-#load_exhibitor_attendance_records conversion, pgconn
-
-# Load all the exhibitor associates
-cea = ConvertExhibitorAssociate.new(pgconn, conversion)
-cea.convert_data
-# load_exhibitor_associates conversion, pgconn
-
-# Load all the stores from the Postgres db
-cs = ConvertStore.new(pgconn, conversion)
-cs.convert_data
-# load_stores conversion, pgconn
-
-# Load all the buyers
-cb = ConvertBuyer.new(pgconn, conversion)
-cb.convert_data
-# load_buyers conversion, pgconn
-
-# Load the buyer attendance
-cba = ConvertBuyerAttendance.new(pgconn, conversion)
-cba.convert_data
-# load_buyer_attendances conversion, pgconn
-
-# Load all the exhibitor line information
-cel = ConvertExhibitorLines.new(pgconn, conversion)
-cel.convert_data
-#load_exhibitor_lines conversion, pgconn
-
-# Load all the associate lines
-cal = ConvertAssociateLines.new(pgconn, conversion)
-cal.convert_data
-# load_associate_lines conversion, pgconn
+# Run the conversions...
+CONVERSIONS.each do | conversion_class |
+  conversion = conversion_class.new(pgconn, conversion)
+  conversion.convert_data
+end
 
 # Close the connection
 pgconn.close
