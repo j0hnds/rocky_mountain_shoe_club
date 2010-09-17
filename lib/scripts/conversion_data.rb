@@ -42,5 +42,20 @@ class ConversionData
     ExhibitorRegistration.find_by_show_id_and_exhibitor_id(show_id, exhibitor_id)
   end
 
+  EMAIL_CORRECTIONS = {
+    'sam @ kaufmans.com' => 'sam@kaufmans.com',
+    'edana@skechers' => "edana@skechers.com",
+    'cconrardyeaerosoles.com' => "cconrardye@aerosoles.com",
+    'todd.home@consolidated shoe.com' => "todd.home@consolidated_shoe.com",
+    'wendy.collins@consolidated shoe.com' => "wendy.collins@consolidated_shoe.com"
+  }
+
+  def clean_email(obj)
+    if obj.respond_to?(:email)
+      email = obj.email
+      obj.email = EMAIL_CORRECTIONS[email] if EMAIL_CORRECTIONS.has_key(email)
+    end
+  end
+
 end
 

@@ -31,14 +31,11 @@ class ConvertExhibitor < ConvertTable
     exhibitor.fax = row[8]
     exhibitor.cell = row[9]
     exhibitor.email = row[10]
-  #  puts "[#{exhibitor.email}]"
+    #  puts "[#{exhibitor.email}]"
     #
     # The following takes care of the bad data that exists in the PG DB
     #
-    exhibitor.email = "edana@skechers.com" if exhibitor.email == 'edana@skechers'
-    exhibitor.email = "cconrardye@aerosoles.com" if exhibitor.email == 'cconrardyeaerosoles.com'
-    exhibitor.email = "todd.home@consolidated_shoe.com" if exhibitor.email == 'todd.home@consolidated shoe.com'
-    exhibitor.email = "wendy.collins@consolidated_shoe.com" if exhibitor.email == 'wendy.collins@consolidated shoe.com'
+    @conversion_data.clean_email(exhibitor)
     #
     # End of data cleanup section
     #

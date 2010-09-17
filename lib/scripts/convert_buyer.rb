@@ -27,7 +27,7 @@ class ConvertBuyer < ConvertTable
 
     # Clean up invalid data
     #
-    buyer.email = 'sam@kaufmans.com' if buyer.email == 'sam @ kaufmans.com'
+    @conversion_data.clean_email(buyer)
     #
     # End of invalid data cleanup.
 
