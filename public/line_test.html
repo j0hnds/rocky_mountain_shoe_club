@@ -1,0 +1,50 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Exhibitor Line Test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="/javascripts/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery/jquery.livequery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Hook up the hyperlink to an add line edit field
+            $('a#add_line').click(function() {
+                $('#line_fields').append('<li><input type="text" name="exhibitor[line][]"/><a href="#" class="line_up">Up</a>|<a href="#" class="line_down">Down</a>|<a href="#" class="line_remove">Remove</a></li>');
+            });
+
+            $('.line_up').livequery('click', function() {
+               if ($(this).parent().prev().length > 0) {
+                   my_value = $(this).parent().children('input').val();
+                   prev_value = $(this).parent().prev().children('input').val();
+                   $(this).parent().children('input').val(prev_value);
+                   $(this).parent().prev().children('input').val(my_value);
+               }
+            });
+            $('.line_down').livequery('click', function() {
+               if ($(this).parent().next().length > 0) {
+                   my_value = $(this).parent().children('input').val();
+                   next_value = $(this).parent().next().children('input').val();
+                   $(this).parent().children('input').val(next_value);
+                   $(this).parent().next().children('input').val(my_value);
+               }
+            });
+            $('.line_remove').livequery('click', function() {
+               $(this).parent().remove();
+            });
+        });
+    </script>
+  </head>
+  <body>
+      <div><input type="text"/><a href="#" id="add_line">Add Line</a></div>
+      <form action="/exhibitor_lines" method="POST">
+          <fieldset>
+              <ol id="line_fields"></ol>
+              <input type="submit" />
+          </fieldset>
+      </form>
+  </body>
+</html>
