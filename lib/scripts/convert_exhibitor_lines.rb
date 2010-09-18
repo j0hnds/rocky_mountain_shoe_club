@@ -1,6 +1,3 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-
 class ConvertExhibitorLines < ConvertTable
 
   private
@@ -14,11 +11,11 @@ class ConvertExhibitorLines < ConvertTable
 
     ex_line = ExhibitorLine.new
 
-    ex_line.exhibitor_registration_id = er.id
+    ex_line.exhibitor_registration_id = er.id if er
     ex_line.line = row[4]
     ex_line.priority = row[5]
 
-    ex_line.save!
+    ex_line.save! if er
 
     ex_line
   end

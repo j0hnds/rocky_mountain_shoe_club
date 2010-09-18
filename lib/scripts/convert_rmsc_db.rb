@@ -25,7 +25,7 @@ CONVERSIONS = [ ConvertShow,
               ]
 
 # Create the conversion collector
-conversion = ConversionData.new
+conversion_data = ConversionData.new
 
 # Get a connection...
 pgconn = PostgresConnection.new
@@ -35,7 +35,7 @@ pgconn.clear_mysql_database
 
 # Run the conversions...
 CONVERSIONS.each do | conversion_class |
-  conversion = conversion_class.new(pgconn, conversion)
+  conversion = conversion_class.new(pgconn, conversion_data)
   conversion.convert_data
 end
 

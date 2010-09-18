@@ -31,7 +31,7 @@ EOF
     store.address_2 = row[4]
     store.city = row[5]
     store.state = row[6]
-    store.postal_code = row[7]
+    store.postal_code = (row[7].blank?) ? '00000' : row[7]
     store.phone = row[8]
     store.fax = row[9]
 

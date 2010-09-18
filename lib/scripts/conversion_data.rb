@@ -38,7 +38,7 @@ class ConversionData
 
   def get_exhibitor_registration(pg_show_id, pg_exhibitor_id)
     show_id = @show_mappings[pg_show_id]
-    exhibitor_id = @show_mappings[pg_exhibitor_id]
+    exhibitor_id = @exhibitor_mappings[pg_exhibitor_id]
     ExhibitorRegistration.find_by_show_id_and_exhibitor_id(show_id, exhibitor_id)
   end
 
@@ -53,7 +53,7 @@ class ConversionData
   def clean_email(obj)
     if obj.respond_to?(:email)
       email = obj.email
-      obj.email = EMAIL_CORRECTIONS[email] if EMAIL_CORRECTIONS.has_key(email)
+      obj.email = EMAIL_CORRECTIONS[email] if EMAIL_CORRECTIONS.has_key?(email)
     end
   end
 

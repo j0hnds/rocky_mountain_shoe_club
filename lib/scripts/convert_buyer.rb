@@ -13,7 +13,7 @@ class ConvertBuyer < ConvertTable
     buyer.first_name = row[2]
     buyer.last_name = row[3]
     buyer.email = row[4]
-    buyer.cell = row[5]
+    buyer.phone = row[5]
 
     # Clean up invalid data
     #
