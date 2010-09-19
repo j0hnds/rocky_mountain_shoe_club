@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <head>
+    <title>A PDF File</title>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <style type="text/css">
+      h1 {
+        text-align: center;
+}
+.odd {
+	background-color:#EDF3FA;
+	}
+.even {
+	background-color:#DDE4ED;
+	}
+        table {
+          font-size: 12pt;
+}
+
+      @page {
+        margin: 0.5in 0.5in 0.5in 0.5in;
+        @bottom {
+          content: "Page " counter(page) " of " counter(pages);
+}
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Exhibitor Lines</h1>
+    <table>
+      <col/>
+      <col/>
+      <col/>
+      <thead>
+        <tr>
+          <th>Line</th>
+          <th>Exhibitor</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @exhibitor_lines.each_with_index do | line, index | %>
+        <% row_class = (index % 2 == 0) ? 'even' : 'odd' %>
+        <tr class="<%= row_class -%>">
+          <td><%= line.line -%></td>
+          <td><%= format_name(line.exhibitor) -%></td>
+          <td><%= line.exhibitor.phone -%></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>

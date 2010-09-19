@@ -46,6 +46,7 @@ doc\:clobber_plugins=Remove plugin documentation
 doc\:clobber_rails=Remove rdoc products
 doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
+doc\:plugins\:princely=Generate documentation for the princely plugin
 doc\:plugins\:rails_upgrade=Generate documentation for the rails_upgrade plugin
 doc\:plugins\:stickies=Generate documentation for the stickies plugin
 doc\:rails=Build the RDOC HTML Files
