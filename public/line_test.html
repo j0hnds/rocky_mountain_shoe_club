@@ -13,7 +13,11 @@ and open the template in the editor.
         $(document).ready(function () {
             // Hook up the hyperlink to an add line edit field
             $('a#add_line').click(function() {
-                $('#line_fields').append('<li><input type="text" name="exhibitor[line][]"/><a href="#" class="line_up">Up</a>|<a href="#" class="line_down">Down</a>|<a href="#" class="line_remove">Remove</a></li>');
+                // Get the value out of the input field (my sibling)
+                line_value = $(this).parent().children('input').val();
+                $('#line_fields').append('<li><input type="text" value="' + line_value + '" name="exhibitor[line][]"/><a href="#" class="line_up">Up</a>|<a href="#" class="line_down">Down</a>|<a href="#" class="line_remove">Remove</a></li>');
+                // Now, clear out the field
+                $(this).parent().children('input').val('');
             });
 
             $('.line_up').livequery('click', function() {
