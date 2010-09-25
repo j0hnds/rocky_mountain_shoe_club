@@ -12,6 +12,7 @@ class ExhibitorsController < ApplicationController
   # filtered list.
   def search
     @exhibitors = exhibitor_list
+    params[:format => 'js']
     render :action => :success
   end
 
@@ -33,6 +34,7 @@ class ExhibitorsController < ApplicationController
 
   def edit
     @exhibitor = Exhibitor.find(params[:id])
+    @exhibitor_registration = ExhibitorRegistration.find_by_exhibitor_id_and_show_id(@exhibitor.id, @current_show.id)
   end
 
   def update
@@ -74,7 +76,7 @@ class ExhibitorsController < ApplicationController
   private
 
   def exhibitor_list
-    Exhibitor.search_for(@search_term).ordered
+    Exhibitor.search_for(@search_term).ordered.paginate(:page => params[:page])
   end
 
 end

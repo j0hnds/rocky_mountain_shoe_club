@@ -1,7 +1,7 @@
 <!-- EXHIBITORS LIST -->
 <div class="content">
   <% if Exhibitor.count > 0 %>
-    <table summary="List of Exhibitors" class="grid center">
+    <table summary="List of Exhibitors" class="center">
       <col style="width:60px" />
       <col style="width:60px" />
       <col/>
@@ -40,6 +40,7 @@
         <% end %>
       </tbody>
     </table>
+    <%= will_paginate @exhibitors %>
   <% else %>
     <div style="padding:0 10px 10px 10px">
       <div class="message notice">

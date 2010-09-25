@@ -1,6 +1,9 @@
 class Exhibitor < ActiveRecord::Base
   include ValidationConstants
 
+  cattr_reader :per_page
+  @@per_page = 20
+
   has_many :exhibitor_registrations
   has_many :shows, :through => :exhibitor_registrations
 

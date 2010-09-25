@@ -15,8 +15,9 @@ Exhibitors
     <div class="beta">
       <%= link_to 'Add Exhibitor', new_exhibitor_path, :class => 'button insert' %>
     </div>
-    <% form_tag search_exhibitors_path, :id => 'search_form', :class => 'gamma ajaxed' do %>
+    <% form_tag "#{search_exhibitors_path}", :id => 'search_form', :method => :get, :class => 'gamma ajaxed' do %>
       <% field_set_tag do %>
+        <%= hidden_field_tag 'format', 'js' -%>
         <%= text_field_tag 'search', @search_term, :id => 'search', :class => 'dynamic_label' -%>
         <%= submit_tag 'Filter', :class => 'button', :name => 'search_button', :id => 'search_button' -%>
       <% end %>

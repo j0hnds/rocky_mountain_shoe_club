@@ -8,3 +8,47 @@
     <% end %>
   <% end %>
 <% end %>
+<div class="tabbed_panels">
+<div class="tabs">
+  <ul>
+    <li><%= link_to 'Lines', '#lines_tab' -%></li>
+    <li><%= link_to 'Associates', '#associates_tab' -%></li>
+  </ul>
+</div>
+  <div class="panel">
+<div class="sample" id="lines_tab">
+  <div>
+    <%= text_field_tag :new_line %>
+    <%= link_to 'Add Line', '#', :id => 'add_line', :class => 'small button'-%>
+  </div>
+  <% form_tag '/exhibitor_registration/exhibitor_lines' do %>
+    <% field_set_tag do %>
+  <ol id="line_fields">
+    <% @exhibitor_registration.exhibitor_lines.each do | el | %>
+  <li>
+    <%= text_field_tag 'exhibitor[line][]', el.line -%>
+    <%= link_to 'Up', "#", :class => "small button line_up" %>
+    <%= link_to 'Down', "#", :class => "small button line_down" %>
+    <%= link_to 'Remove', "#", :class => "small button line_remove"%>
+  </li>
+    <% end %>
+  </ol>
+    <%= submit_tag "Save Lines", :class => 'button'  %>
+    <% end %>
+  <% end %>
+</div>
+<div class="sample" id="associates_tab">
+  <div>
+    <%= text_field_tag :new_first_name %>
+    <%= text_field_tag :new_last_name %>
+    <%= link_to 'Add Associate', '#', :class => 'small button'-%>
+  </div>
+  <% form_tag '/exhibitor_registration/exhibitor_associates' do %>
+    <% field_set_tag do %>
+  <ol id="associate_fields"></ol>
+    <%= submit_tag "Save Associates", :class => 'button'  %>
+    <% end %>
+  <% end %>
+</div>
+  </div>
+</div>
